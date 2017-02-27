@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.mapper.PositionMapper">
+  <resultMap id="BaseResultMap" type="positionQuery">
+    <id column="positionId" jdbcType="INTEGER" property="positionid" />
+    <result column="positionCode" jdbcType="VARCHAR" property="positioncode" />
+    <result column="positionName" jdbcType="VARCHAR" property="positionname" />
+    <result column="deptID" jdbcType="INTEGER" property="deptid" />
+    <result column="isDel" jdbcType="CHAR" property="isdel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    positionId, positionCode, positionName, deptID, isDel
+  </sql>
+  <insert id="insert" parameterType="positionQuery">
+    insert into t_position (positionId, positionCode, positionName, 
+      deptID, isDel)
+    values (#{positionid,jdbcType=INTEGER}, #{positioncode,jdbcType=VARCHAR}, #{positionname,jdbcType=VARCHAR}, 
+      #{deptid,jdbcType=INTEGER}, #{isdel,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="positionQuery">
+    insert into t_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionid != null">
+        positionId,
+      </if>
+      <if test="positioncode != null">
+        positionCode,
+      </if>
+      <if test="positionname != null">
+        positionName,
+      </if>
+      <if test="deptid != null">
+        deptID,
+      </if>
+      <if test="isdel != null">
+        isDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionid != null">
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="positioncode != null">
+        #{positioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="positionname != null">
+        #{positionname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getAllPositions" resultType="positionQuery">
+  	select * from t_position
+  </select>
+</mapper>

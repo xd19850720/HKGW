@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hk.mapper.ResourceMapper" >
+ 	<select id="getAllResources" resultType="resourceQuery">
+ 		select r.*,p.privilegeName from t_resource r 
+ 		left join t_privilege p on r.privilege_id = p.privilegeId 
+ 		where r.isDel = 1 limit #{startIndex},#{rows}
+ 	</select>
+ 	
+ 	<select id="getResourcesCount" resultType="int">
+ 		select count(*) from t_resource where isDel = 1
+ 	</select>
+ 	
+ 	
+ 	<select id="getPrivilegeByResourceId" resultType="privilegeQuery" parameterType="int">
+ 		select p.* from t_resource r join t_privilege p on r.privilege_id = p.privilegeId
+ 		where r.resourceId = #{resourceid}
+ 	</select>
+ 	
+ 	<select id="getUnSelectedPrivilegeByResourceId" parameterType="resourceQuery" resultType="privilegeQuery">
+ 		select * from t_privilege p where p.privilegeId != 
+ 			(select r.privilege_id from t_resource r where r.resourceId = #{resourceid})
+ 			limit #{startIndex},#{rows}
+ 	</select>
+ 	
+ 	<select id="getUnSelectedPrivilegeCountByResourceId" parameterType="resourceQuery" resultType="int">
+ 		select count(*) from t_privilege p where p.privilegeId != 
+ 			(select r.privilege_id from t_resource r where r.resourceId = #{resourceid})
+ 	</select>
+ 	
+ 	
+ <insert id="addResource" parameterType="resourceQuery" >
+    insert into t_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        resourceId,
+      </if>
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="privilegeId != null" >
+        privilege_id,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        #{resourceid,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="privilegeId != null" >
+        #{privilegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="deleteResources" parameterType="int">
+  	update t_resource set isDel = 0 where resourceid in 
+  	<foreach open="(" separator="," close=")" item="id" collection="list">
+  			#{id}
+  	</foreach>
+  </update>
+ <update id="modifyResource" parameterType="resourceQuery" >
+    update t_resource
+    <set >
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="privilegeId != null" >
+        privilege_id = #{privilegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=CHAR},
+      </if>
+    </set>
+    where resourceId = #{resourceid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="modifyResourcePrivilege" parameterType="resourceQuery">
+  	 update t_resource r set privilege_id = #{privilegeId} where resourceId = #{resourceid}
+  </update>
+  
+  
+  
+  
+  
+  
+</mapper>

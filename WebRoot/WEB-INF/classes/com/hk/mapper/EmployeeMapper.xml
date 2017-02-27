@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="employeeQuery">
+    <id column="employeeId" jdbcType="INTEGER" property="employeeid" />
+    <result column="employeeCode" jdbcType="VARCHAR" property="employeecode" />
+    <result column="employeeName" jdbcType="VARCHAR" property="employeename" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="positionId" jdbcType="INTEGER" property="positionid" />
+    <result column="isDel" jdbcType="CHAR" property="isdel" />
+  </resultMap>
+
+
+  <sql id="search_employee_condition1">
+  	<if test="employeename != null and employeename!=''">
+  		and e.employeeName = #{employeename}
+  	</if>
+  	<if test="employeecode != null and employeecode!=''">
+  		and e.employeeCode = #{employeecode}
+  	</if>
+  	<if test="positionid != null and positionid!=0">
+  		and e.positionId = #{positionid}
+  	</if>
+  	<if test="tel!= null and tel !=''">
+  		and e.tel = #{tel}
+  	</if>
+  	<if test="startDate != null">
+  		and e.createtime &gt;= #{startDate}
+  	</if>
+  	<if test="endDate != null">
+  		and e.createtime &lt;= #{endDate}
+  	</if>
+  </sql>
+   <sql id="search_employee_condition2">
+  	 limit #{startIndex},#{rows} 
+  </sql>
+  <sql id="search_employee_count_condition">
+  	<where>
+  		<include refid="search_employee_condition1"></include>
+		and isDel = 1
+  	</where>
+  </sql>
+  <sql id="search_employee_condition">
+  	<where>
+  		<include refid="search_employee_condition1"></include>
+  		and e.isDel = 1
+  		<include refid="search_employee_condition2"></include>
+  		
+  	</where>
+  </sql>
+  <select id="getAllEmployees" resultType="employeeQuery">
+  	select e.*,positionName from t_employee e join t_position p 
+  		where e.positionId = p.positionId and e.isDel = 1
+  </select>
+  <select id="getEmployeesByPage" parameterType="employeeQuery" resultType="employeeQuery">
+  		select a.*,r.name from (select e.*,positionName from t_employee e join t_position p  
+  			on e.positionId = p.positionId
+  		<include refid="search_employee_condition"></include>) a left join t_role r 
+  		on a.roleId = r.roleId
+  </select>
+  <select id="getEmployeesCount" resultType="int" parameterType="employeeQuery">
+  	select count(*) from t_employee e	 
+  	<include refid="search_employee_count_condition"></include>
+  </select>
+  
+  <select id="getLastedEmployee" resultType="employeeQuery">
+  	SELECT * from t_employee where employeeId = (SELECT max(employeeId) FROM t_employee)
+  </select>
+  
+  <select id="getEmployeeQueryById" parameterType="int" resultType="employeeQuery">
+  	select * from t_employee where employeeId=#{id} and isDel = 1
+  </select>
+  
+  <select id="getEmployeesByConditions" parameterType="employeeQuery" 
+  	resultType="employeeQuery">
+  		select * from t_employee
+  		<include refid="search_employee_condition"></include>
+  </select>
+  <select id="getEmployeesCountByConditions" parameterType="employeeQuery" resultType="int">
+  	select count(*) from t_employee 
+  	<include refid="search_employee_condition"></include>
+  </select>
+  <insert id="insert" parameterType="employeeQuery">
+    insert into t_employee (employeeId, employeeCode, employeeName, 
+      sex, tel, mail, positionId, 
+      isDel)
+    values (#{employeeid,jdbcType=INTEGER}, #{employeecode,jdbcType=VARCHAR}, #{employeename,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{positionid,jdbcType=INTEGER}, 
+      #{isdel,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="employeeQuery" keyProperty="employeeid">
+  	<selectKey resultType="int" order="AFTER" keyProperty="employeeid">
+  		select last_insert_id() 	
+  	</selectKey>
+    insert into t_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeid != null">
+        employeeId,
+      </if>
+      <if test="employeecode != null">
+        employeeCode,
+      </if>
+      <if test="employeename != null">
+        employeeName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="positionid != null">
+        positionId,
+      </if>
+      <if test="isdel != null">
+        isDel,
+      </if>
+      <if test="age != null">
+       age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="employeecode != null">
+        #{employeecode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeename != null">
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="positionid != null">
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=CHAR},
+      </if>
+       <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+   <update id="updateByPrimaryKeySelective" parameterType="employeeQuery">
+    update t_employee
+    <set>
+      <if test="employeecode != null">
+        employeeCode = #{employeecode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeename != null">
+        employeeName = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="positionid != null">
+        positionId = #{positionid,jdbcType=INTEGER},
+      </if>
+       <if test="age != null">
+         age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        isDel = #{isdel,jdbcType=CHAR},
+      </if>
+    </set>
+    where employeeId = #{employeeid,jdbcType=INTEGER}
+  </update>
+  <update id="deleteEmployeesByIds" parameterType="int">
+  		update t_employee set isDel = 0 where employeeid in
+  		<foreach open="(" separator="," close=")" item="id" collection="list">
+  			#{id}
+  		</foreach>
+  </update>
+</mapper>
