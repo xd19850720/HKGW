@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hk.mapper.DeptsignlogMapper" >
+  <resultMap id="BaseResultMap" type="com.hk.bean.Deptsignlog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FSendFileID" property="fsendfileid" jdbcType="INTEGER" />
+    <result column="FuserID" property="fuserid" jdbcType="VARCHAR" />
+    <result column="FuserName" property="fusername" jdbcType="VARCHAR" />
+    <result column="FpositionID" property="fpositionid" jdbcType="VARCHAR" />
+    <result column="FpositionName" property="fpositionname" jdbcType="VARCHAR" />
+    <result column="FText" property="ftext" jdbcType="VARCHAR" />
+    <result column="SignTime" property="signtime" jdbcType="TIMESTAMP" />
+    <result column="isDel" property="isdel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FSendFileID, FuserID, FuserName, FpositionID, FpositionName, FText, SignTime, 
+    isDel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hk.bean.DeptsignlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deptsignlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from deptsignlog
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from deptsignlog
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hk.bean.DeptsignlogExample" >
+    delete from deptsignlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hk.bean.Deptsignlog" >
+    insert into deptsignlog (ID, FSendFileID, FuserID, 
+      FuserName, FpositionID, FpositionName, 
+      FText, SignTime, isDel
+      )
+    values (#{id,jdbcType=INTEGER}, #{fsendfileid,jdbcType=INTEGER}, #{fuserid,jdbcType=VARCHAR}, 
+      #{fusername,jdbcType=VARCHAR}, #{fpositionid,jdbcType=VARCHAR}, #{fpositionname,jdbcType=VARCHAR}, 
+      #{ftext,jdbcType=VARCHAR}, #{signtime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hk.bean.Deptsignlog" >
+    insert into deptsignlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fsendfileid != null" >
+        FSendFileID,
+      </if>
+      <if test="fuserid != null" >
+        FuserID,
+      </if>
+      <if test="fusername != null" >
+        FuserName,
+      </if>
+      <if test="fpositionid != null" >
+        FpositionID,
+      </if>
+      <if test="fpositionname != null" >
+        FpositionName,
+      </if>
+      <if test="ftext != null" >
+        FText,
+      </if>
+      <if test="signtime != null" >
+        SignTime,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fsendfileid != null" >
+        #{fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="fuserid != null" >
+        #{fuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fusername != null" >
+        #{fusername,jdbcType=VARCHAR},
+      </if>
+      <if test="fpositionid != null" >
+        #{fpositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="fpositionname != null" >
+        #{fpositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftext != null" >
+        #{ftext,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null" >
+        #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hk.bean.DeptsignlogExample" resultType="java.lang.Integer" >
+    select count(*) from deptsignlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deptsignlog
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsendfileid != null" >
+        FSendFileID = #{record.fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuserid != null" >
+        FuserID = #{record.fuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fusername != null" >
+        FuserName = #{record.fusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpositionid != null" >
+        FpositionID = #{record.fpositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpositionname != null" >
+        FpositionName = #{record.fpositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftext != null" >
+        FText = #{record.ftext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signtime != null" >
+        SignTime = #{record.signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdel != null" >
+        isDel = #{record.isdel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deptsignlog
+    set ID = #{record.id,jdbcType=INTEGER},
+      FSendFileID = #{record.fsendfileid,jdbcType=INTEGER},
+      FuserID = #{record.fuserid,jdbcType=VARCHAR},
+      FuserName = #{record.fusername,jdbcType=VARCHAR},
+      FpositionID = #{record.fpositionid,jdbcType=VARCHAR},
+      FpositionName = #{record.fpositionname,jdbcType=VARCHAR},
+      FText = #{record.ftext,jdbcType=VARCHAR},
+      SignTime = #{record.signtime,jdbcType=TIMESTAMP},
+      isDel = #{record.isdel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hk.bean.Deptsignlog" >
+    update deptsignlog
+    <set >
+      <if test="fsendfileid != null" >
+        FSendFileID = #{fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="fuserid != null" >
+        FuserID = #{fuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fusername != null" >
+        FuserName = #{fusername,jdbcType=VARCHAR},
+      </if>
+      <if test="fpositionid != null" >
+        FpositionID = #{fpositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="fpositionname != null" >
+        FpositionName = #{fpositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftext != null" >
+        FText = #{ftext,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null" >
+        SignTime = #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hk.bean.Deptsignlog" >
+    update deptsignlog
+    set FSendFileID = #{fsendfileid,jdbcType=INTEGER},
+      FuserID = #{fuserid,jdbcType=VARCHAR},
+      FuserName = #{fusername,jdbcType=VARCHAR},
+      FpositionID = #{fpositionid,jdbcType=VARCHAR},
+      FpositionName = #{fpositionname,jdbcType=VARCHAR},
+      FText = #{ftext,jdbcType=VARCHAR},
+      SignTime = #{signtime,jdbcType=TIMESTAMP},
+      isDel = #{isdel,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

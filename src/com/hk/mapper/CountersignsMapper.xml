@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hk.mapper.CountersignsMapper" >
+  <resultMap id="BaseResultMap" type="com.hk.bean.Countersigns" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FCountersignsID" property="fcountersignsid" jdbcType="VARCHAR" />
+    <result column="FCountersignsCode" property="fcountersignscode" jdbcType="VARCHAR" />
+    <result column="FCountersignsName" property="fcountersignsname" jdbcType="VARCHAR" />
+    <result column="FSendFileID" property="fsendfileid" jdbcType="INTEGER" />
+    <result column="FSuggestion" property="fsuggestion" jdbcType="VARCHAR" />
+    <result column="FisAgree" property="fisagree" jdbcType="INTEGER" />
+    <result column="isDel" property="isdel" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FCountersignsID, FCountersignsCode, FCountersignsName, FSendFileID, FSuggestion, 
+    FisAgree, isDel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hk.bean.CountersignsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from countersigns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from countersigns
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from countersigns
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hk.bean.CountersignsExample" >
+    delete from countersigns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hk.bean.Countersigns" >
+    insert into countersigns (ID, FCountersignsID, FCountersignsCode, 
+      FCountersignsName, FSendFileID, FSuggestion, 
+      FisAgree, isDel)
+    values (#{id,jdbcType=INTEGER}, #{fcountersignsid,jdbcType=VARCHAR}, #{fcountersignscode,jdbcType=VARCHAR}, 
+      #{fcountersignsname,jdbcType=VARCHAR}, #{fsendfileid,jdbcType=INTEGER}, #{fsuggestion,jdbcType=VARCHAR}, 
+      #{fisagree,jdbcType=INTEGER}, #{isdel,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hk.bean.Countersigns" >
+    insert into countersigns
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fcountersignsid != null" >
+        FCountersignsID,
+      </if>
+      <if test="fcountersignscode != null" >
+        FCountersignsCode,
+      </if>
+      <if test="fcountersignsname != null" >
+        FCountersignsName,
+      </if>
+      <if test="fsendfileid != null" >
+        FSendFileID,
+      </if>
+      <if test="fsuggestion != null" >
+        FSuggestion,
+      </if>
+      <if test="fisagree != null" >
+        FisAgree,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fcountersignsid != null" >
+        #{fcountersignsid,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersignscode != null" >
+        #{fcountersignscode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersignsname != null" >
+        #{fcountersignsname,jdbcType=VARCHAR},
+      </if>
+      <if test="fsendfileid != null" >
+        #{fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="fsuggestion != null" >
+        #{fsuggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="fisagree != null" >
+        #{fisagree,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hk.bean.CountersignsExample" resultType="java.lang.Integer" >
+    select count(*) from countersigns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update countersigns
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcountersignsid != null" >
+        FCountersignsID = #{record.fcountersignsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcountersignscode != null" >
+        FCountersignsCode = #{record.fcountersignscode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcountersignsname != null" >
+        FCountersignsName = #{record.fcountersignsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsendfileid != null" >
+        FSendFileID = #{record.fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsuggestion != null" >
+        FSuggestion = #{record.fsuggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fisagree != null" >
+        FisAgree = #{record.fisagree,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdel != null" >
+        isDel = #{record.isdel,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update countersigns
+    set ID = #{record.id,jdbcType=INTEGER},
+      FCountersignsID = #{record.fcountersignsid,jdbcType=VARCHAR},
+      FCountersignsCode = #{record.fcountersignscode,jdbcType=VARCHAR},
+      FCountersignsName = #{record.fcountersignsname,jdbcType=VARCHAR},
+      FSendFileID = #{record.fsendfileid,jdbcType=INTEGER},
+      FSuggestion = #{record.fsuggestion,jdbcType=VARCHAR},
+      FisAgree = #{record.fisagree,jdbcType=INTEGER},
+      isDel = #{record.isdel,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hk.bean.Countersigns" >
+    update countersigns
+    <set >
+      <if test="fcountersignsid != null" >
+        FCountersignsID = #{fcountersignsid,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersignscode != null" >
+        FCountersignsCode = #{fcountersignscode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersignsname != null" >
+        FCountersignsName = #{fcountersignsname,jdbcType=VARCHAR},
+      </if>
+      <if test="fsendfileid != null" >
+        FSendFileID = #{fsendfileid,jdbcType=INTEGER},
+      </if>
+      <if test="fsuggestion != null" >
+        FSuggestion = #{fsuggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="fisagree != null" >
+        FisAgree = #{fisagree,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hk.bean.Countersigns" >
+    update countersigns
+    set FCountersignsID = #{fcountersignsid,jdbcType=VARCHAR},
+      FCountersignsCode = #{fcountersignscode,jdbcType=VARCHAR},
+      FCountersignsName = #{fcountersignsname,jdbcType=VARCHAR},
+      FSendFileID = #{fsendfileid,jdbcType=INTEGER},
+      FSuggestion = #{fsuggestion,jdbcType=VARCHAR},
+      FisAgree = #{fisagree,jdbcType=INTEGER},
+      isDel = #{isdel,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
