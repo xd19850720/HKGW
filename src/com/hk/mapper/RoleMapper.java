@@ -3,6 +3,7 @@ package com.hk.mapper;
 import java.util.List;
 
 import com.hk.bean.EmployeeQuery;
+import com.hk.bean.PrivilegeQuery;
 import com.hk.bean.RoleQuery;
 
 public interface RoleMapper {
@@ -26,5 +27,18 @@ public interface RoleMapper {
 
 	// 更新员工的角色
 	public void modifyEmployeeRole(EmployeeQuery query);
+
+	// 查找和角色关联的权限
+	public List<PrivilegeQuery> getResourcePrivilegeRelate(Integer roleId);
+
+	public Integer getResourcePrivilegeRelateCount(Integer roleId);
+
+	public void deleteRolePrivilegeRelate(RoleQuery query);
+
+	public List<PrivilegeQuery> getPrivilegeUnRelated(RoleQuery query);
+
+	public int getPrivilegeCountUnRelated(RoleQuery query);
+
+	public void addPrivilegeRoleRelate(RoleQuery query);
 
 }

@@ -20,7 +20,34 @@
  		(select roleId from t_employee where employeeId=#{employeeId})
  	</select>
  	
+ 	<select id="getResourcePrivilegeRelate" parameterType="int" resultType="privilegeQuery">
+ 	 	select p.* from t_privilege p join t_role_privilege rp
+ 	 	on p.privilegeId = rp.privilege_id
+ 	 	join t_role r
+ 	 	on rp.role_id = r.roleId 
+ 	 	where r.roleId = #{roleId} and rp.isDel = 1
+ 	</select>
+ 	<select id="getResourcePrivilegeRelateCount" parameterType="int" resultType="int">
+ 	 	select count(*) from t_privilege p join t_role_privilege rp 
+ 	 	on p.privilegeId = rp.privilege_id
+ 	 	join t_role r
+ 	 	on rp.role_id = r.roleId 
+ 	 	where r.roleId = #{roleId} and rp.isDel = 1
+ 	</select>
+ 	<select id="getPrivilegeUnRelated" parameterType="roleQuery" resultType="privilegeQuery">
+ 		 select * from t_privilege where privilegeId not in 
+ 		 	(select privilege_id from t_role_privilege where role_id = #{roleid} and isDel = 1) limit #{startIndex},#{rows}
+ 	</select>
+ 	<select id="getPrivilegeCountUnRelated" parameterType="roleQuery" resultType="int">
+ 		 select count(*) from t_privilege where privilegeId not in 
+ 		 	(select privilege_id from t_role_privilege where role_id = #{roleid} and isDel = 1) 
+ 	</select> 
  	
+	<insert id="addPrivilegeRoleRelate" parameterType="roleQuery">
+		insert into t_role_privilege (role_id,privilege_id,isDel) 
+			values (#{roleid},#{privilegeIdRelated},1)
+	</insert>
+
  <insert id="addRole" parameterType="roleQuery" >
     insert into t_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -78,7 +105,12 @@
   	 update t_employee set roleId = #{roleid} where employeeid = #{employeeid} and isDel= 1
   </update>
   
-  
+  <update id="deleteRolePrivilegeRelate" parameterType="roleQuery">
+  	update t_role_privilege set isDel = 0 where role_id=#{roleid} and privilege_id in 
+  	<foreach open="(" separator="," close=")" item="privilege" collection="privilegeIds">
+  			#{privilege}
+  	</foreach>
+  </update>
   
   
   

@@ -67,4 +67,13 @@ public interface SecurityService {
 
 	// 修改资源的权限
 	public void modifyResourcePrivilege(Integer resourceId, Integer privilegeId);
+
+	public Map<String, Object> getRelatedPrivileges(Integer roleId);
+
+	public void deletePrivilegeRelate(RoleQuery query);
+
+	public Map<String, Object> getPrivilegeUnRelated(RoleQuery query);
+
+	public void addPrivilegeIdRelated(Integer roleId, List<Integer> privilegeIds);
+
 }

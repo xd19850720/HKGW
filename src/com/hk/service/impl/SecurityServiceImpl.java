@@ -173,4 +173,42 @@ public class SecurityServiceImpl implements SecurityService {
 		query.setResourceid(resourceId);
 		resourceMapper.modifyResourcePrivilege(query);
 	}
+
+	@Override
+	public Map<String, Object> getRelatedPrivileges(Integer roleId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<PrivilegeQuery> privilegeQuery = roleMapper
+				.getResourcePrivilegeRelate(roleId);
+		map.put("rows", privilegeQuery);
+		map.put("total", roleMapper.getResourcePrivilegeRelateCount(roleId));
+		return map;
+	}
+
+	@Override
+	public void deletePrivilegeRelate(RoleQuery query) {
+		roleMapper.deleteRolePrivilegeRelate(query);
+	}
+
+	@Override
+	public Map<String, Object> getPrivilegeUnRelated(RoleQuery query) {
+		query.setStartIndex((query.getPage() - 1) * query.getRows());
+		List<PrivilegeQuery> privilegeQuery = roleMapper
+				.getPrivilegeUnRelated(query);
+		Integer count = roleMapper.getPrivilegeCountUnRelated(query);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("total", count);
+		map.put("rows", privilegeQuery);
+		return map;
+	}
+
+	@Override
+	public void addPrivilegeIdRelated(Integer roleId, List<Integer> privilegeIds) {
+		for (Integer privilegeId : privilegeIds) {
+			RoleQuery query = new RoleQuery();
+			query.setRoleid(roleId);
+			query.setPrivilegeIdRelated(privilegeId);
+			roleMapper.addPrivilegeRoleRelate(query);
+		}
+	}
 }

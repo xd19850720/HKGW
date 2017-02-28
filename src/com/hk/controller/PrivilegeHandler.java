@@ -163,4 +163,46 @@ public class PrivilegeHandler {
 		return "更新成功";
 	}
 
+	// 获取资源已经关联的权限
+	@RequestMapping("/getResourcePrivilegeRelate")
+	public @ResponseBody
+	Map<String, Object> getResourcePrivilegeRelate(Integer roleId) {
+		return securityService.getRelatedPrivileges(roleId);
+	}
+
+	@RequestMapping("/deletePrivilegeRelated")
+	public @ResponseBody
+	String deletePrivilegeRelated(Integer roleId, String privilegeIds) {
+		String[] idArray = privilegeIds.split(",");
+		List<Integer> idList = new ArrayList<Integer>();
+		for (String id : idArray) {
+			idList.add(Integer.parseInt(id));
+		}
+		RoleQuery roleQuery = new RoleQuery();
+		roleQuery.setPrivilegeIds(idList);
+		roleQuery.setRoleid(roleId);
+		securityService.deletePrivilegeRelate(roleQuery);
+		return "删除成功";
+	}
+
+	// 查询角色可配置的权限
+	@RequestMapping("/getPrivilegeUnRelated")
+	public @ResponseBody
+	Map<String, Object> getPrivilegeUnRelated(RoleQuery query) {
+
+		return securityService.getPrivilegeUnRelated(query);
+	}
+
+	// 增加角色的权限
+	@RequestMapping("/addPrivilegeRoleRelate")
+	public @ResponseBody
+	String addPrivilegeRoleRelate(Integer roleId, String privilegeIds) {
+		String[] idArray = privilegeIds.split(",");
+		List<Integer> idList = new ArrayList<Integer>();
+		for (String id : idArray) {
+			idList.add(Integer.parseInt(id));
+		}
+		securityService.addPrivilegeIdRelated(roleId, idList);
+		return "添加成功";
+	}
 }
