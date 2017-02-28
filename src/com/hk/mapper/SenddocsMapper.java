@@ -17,6 +17,8 @@ public interface SenddocsMapper {
     int insertSelective(Senddocs record);
 
     List<Senddocs> selectByExample(SenddocsExample example);
+    
+    List<Senddocs> selectAll();
 
     Senddocs selectByPrimaryKey(Integer id);
 

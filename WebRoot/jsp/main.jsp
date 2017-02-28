@@ -47,7 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="cc" class="easyui-layout" fit=true style="width:100%;height:100%;">  
 		    <div region="north" title="easyui-layout"  split="false" style="height:100px;"></div>  
 		    <div region="west"  iconCls="icon-ok" split="true" title="菜单" style="width:200px;">
-				<div id="aa" class="easyui-accordion" fit=true >  
+				<div id="aa" class="easyui-accordion" fit=true > 
+				    <div title="待办">  
+				       <a title="jsp/senddocs/sendDocumentList.jsp">待办事项</a>
+				    </div> 	 
 				    <div title="用户管理"  style="overflow:auto;padding:10px;">  
 				    	<a title="jsp/users.jsp" >用户列表</a> <br/>
 				    	<a title="jsp/window.jsp" >用户功能</a> 
@@ -60,7 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div title="权限管理">  
 				    </div> 
 				    <div title="资源管理">  
-				    </div> 				     
+				    </div>
+				     				     
 				</div>  
 		    </div>  
 		    <div region="center"  title="主界面" style="padding:5px;">

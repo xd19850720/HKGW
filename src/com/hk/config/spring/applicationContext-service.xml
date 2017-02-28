@@ -20,4 +20,5 @@
 	<bean id="departmentService" class="com.hk.service.impl.DepartmentServiceImpl"/>
 	<bean id="positionService" class="com.hk.service.impl.PositionServiceImpl"/>
 	<bean id="securityService" class="com.hk.service.impl.SecurityServiceImpl"></bean>
+	<bean id="sendDocsService" class="com.hk.service.impl.SendDocsServiceImpl"></bean>
 </beans>

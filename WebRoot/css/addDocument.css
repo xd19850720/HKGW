@@ -1,0 +1,32 @@
+.myinput {
+	border: 0px;
+}
+/*让表格边框线变细 */
+table { /* margin: 0 auto; */
+	border-collapse: collapse;
+	border: none
+}
+form table tr td {
+	background-color: #F0F0F0;
+	border-top: #DBDBDB 1px solid;
+	border-left: #DBDBDB 1px solid;
+	border-bottom: #DBDBDB 1px solid;
+	border-right: #DBDBDB 1px solid;
+}
+
+.white {
+	background-color: #FFFFFF;
+
+}
+.whitebig {
+	background-color: #FFFFFF;
+
+}
+
+.black {
+	
+}
+
+.bigbig {
+
+}

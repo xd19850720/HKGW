@@ -113,6 +113,10 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select * from senddocs
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
