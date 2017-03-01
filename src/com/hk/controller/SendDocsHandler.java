@@ -32,5 +32,13 @@ public class SendDocsHandler {
 		map.put("total", sendDocsService.getAllDocs().size());
 		return map;
 	}
+	@RequestMapping("/add")
+	@ResponseBody
+	public Map<String, Object> add(Senddocs senddocs){
+		sendDocsService.add(senddocs);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "1");
+		return map;
+	}
 
 }

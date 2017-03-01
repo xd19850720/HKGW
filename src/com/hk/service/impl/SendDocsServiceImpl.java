@@ -27,5 +27,10 @@ public class SendDocsServiceImpl implements SendDocsService {
 		return docs;
 	}
 
+	@Override
+	public void add(Senddocs docs) {
+		senddocsMapper.insert(docs);
+	}
+
 	
 }

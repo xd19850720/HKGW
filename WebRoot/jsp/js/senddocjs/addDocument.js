@@ -178,6 +178,7 @@ function selectDepJSP(inputID) {
 }
 // 生成文件字号
 function setFileNum(inputID) {
+	alert(inputID);
 	var iTop = (window.screen.availHeight - 255) / 2; // 获得窗口的垂直位置;
 	var iLeft = (window.screen.availWidth - 350) / 2; // 获得窗口的水平位置;
 	var value = window.showModalDialog('createFileNum.jsp', '',
@@ -345,121 +346,122 @@ function add() {
 	
 	$('#button').hide();
 	$('#readme').show();
+	alert(0);
 	$.ajax({
-		url : 'DocumentDealAction_add.do',
+		url : '/HKGW/sendDocs/add.action',
 		type : "POST",
 		data : {
 			// 编码
-			"doc.fCode" : "",
+			"fcode" : "",
 			// 形成年度
-			"doc.fyear" : year,
+			"fyear" : year,
 			// 承办部门
-			"doc.fdepartment" : org,
+			"fdepartment" : org,
 			// 承办部门ID
-			"doc.fdepartmentID" : orgID,
+			"fdepartmentid" : orgID,
 			// 文件日期
-			"doc.fFiledate" : fileDate,
+			"ffiledate" : fileDate,
 			// 保密期限
-			"doc.fSecrecy" : secretPeriod,
+			"fsecrecy" : secretPeriod,
 			// 文件字号
-			"doc.fNo" : fileNum,
+			"fno" : fileNum,
 			// 主题词
-			"doc.fKeyWord" : keyWord,
+			"fkeyword" : keyWord,
 			// 题名
-			"doc.ftitle" : fileName,
+			"ftitle" : fileName,
 			// 份数
-			"doc.fcopies" : fenshu,
+			"fcopies" : fenshu,
 			// 张数
-			"doc.fsheets" : zhangshu,
+			"fsheets" : zhangshu,
 			// 附件ID
-			// "doc.fUploadFile" :"" ,
+			// "fUploadFile" :"" ,
 			// 附件题名
-			"doc.fuploadName" : attachmentName,
+			"fuploadname" : attachmentName,
 			// 附件数
-			"doc.fuploadNumer" : attachmentNums,
+			"fuploadnumer" : attachmentNums,
 			// 密级
-			"doc.fSecrecyLevel" : secretItems,
+			"fsecrecylevel" : secretItems,
 			// 登记日期
-			"doc.fCreateDate" : loginDate,
+			"fcreatedate" : loginDate,
 			// 退文日期
-			"doc.fbackDate" : backDate,
+			"fbackdate" : backDate,
 			// 发文类型
-			"doc.ftype" : sendType,
+			"ftype" : sendType,
 			// 存档
-			"doc.ffile" : ffile,
+			"ffile" : ffile,
 			// * 承办人
-			"doc.fcarrier" : loginPerson,
+			"fcarrier" : loginPerson,
 			// * 承办人ID
-			"doc.fcarrierID" : loginPersonID,
+			"fcarrierID" : loginPersonID,
 			// * 文件登记部门
-			"doc.fRegisterDept" : loginOrg,
+			"fregisterdept" : loginOrg,
 			// * 文件登记部门ID
-			"doc.fRegisterDeptId" : loginOrgID,
+			"fregisterdeptid" : loginOrgID,
 			// * 拟稿人
-			"doc.fDraftPeople" : drafter,
+			"fdraftpeople" : drafter,
 			// * 拟稿人ID
-			"doc.fDraftPeopleID" : DraftPeopleID,
+			"fdraftpeopleid" : DraftPeopleID,
 			// * 核稿人
-			"doc.fNuclearDraft" : hegaoPerson,
+			"fnucleardraft" : hegaoPerson,
 			// * 核稿人ID
-			"doc.fNuclearDraftID" : "",
+			"fnucleardraftid" : "",
 			// * 审核人
-			"doc.faudit" : verifyPerson,
+			"faudit" : verifyPerson,
 			// * 审核人ID
-			"doc.fauditID" : "",
+			"fauditid" : "",
 			// * 会签人
-			"doc.fcountersign" : countersign,
+			"fcountersign" : countersign,
 			// * 签发人
-			"doc.fIssuer" : issuer,
+			"fissuer" : issuer,
 			// * 签发人ID
-			"doc.fIssuerID" : "",
+			"fissuerid" : "",
 			// * 缓急
-			"doc.fLazy" : isUrgency,
+			"flazy" : isUrgency,
 			// * 制度
-			"doc.fzhidu" : fzhidu,
+			"fzhidu" : fzhidu,
 			// * 本人档案
-			"doc.fselfFile" : selfFile,
+			"fselffile" : selfFile,
 			// * 倌件号
-			"doc.fPackageNum" : fPackageNum,
+			"fpackagenum" : fPackageNum,
 			// * 室件号
-			"doc.fRoomNum" : fRoomNum,
+			"froomnum" : fRoomNum,
 			// * 卷内顺序号
-			"doc.fNum" : fNum,
+			"fnum" : fNum,
 			// * 拟办意见
-			"doc.fSuggestion" : fSuggestion,
+			"fsuggestion" : fSuggestion,
 			// * 处理情况
-			"doc.fDealSituation" : fDealSituation,
+			"fdealsituation" : fDealSituation,
 			// * 备注
-			"doc.fRemark" : fRemark,
+			"fremark" : fRemark,
 			// * 正文ID
-			// "doc.fMainBodyId" : "",
+			// "fMainBodyId" : "",
 			// * 模版ID
-			"doc.fModelId" : "",
+			"fmodelid" : "",
 			// * 公文状态
-			"doc.fDocumentStatus" : "草稿",
+			"fdocumentstatus" : "草稿",
 
 			// * 主送部门
-			"doc.fMainSupplyDep" : mainSend,
+			"fmainsupplydep" : mainSend,
 			// * 主送部门id
-			"doc.fMainSupplyDepId" : mainSendID,
+			"fmainsupplydepid" : mainSendID,
 			// * 主送部门type //2014-2-26 xuda 修改 这个是给主送表用，为了方尽量少的修改，接收字段没有变化
-//			"doc.fMainSupplyDepType" : readRangeType,
+//			"fMainSupplyDepType" : readRangeType,
 			// * 抄送部门
-			"doc.fCopyDepartments" : duplicateSend,
+			"fcopydepartments" : duplicateSend,
 			// * 抄送部门
-			"doc.fCopyDepartmentsId" : duplicateSendID,
+			"fcopydepartmentsid" : duplicateSendID,
 			// * 抄送部门
-			"doc.fCopyDepartmentsType" : duplicateSendType,
+			"fcopydepartmentstype" : duplicateSendType,
 			// * 责任者
-			"doc.fResponsior" : fresponsior,
+			"fresponsior" : fresponsior,
 			// * 文件登记部门ID
-			// "doc.fRegisterDeptId" :loginOrgID,
+			// "fRegisterDeptId" :loginOrgID,
 			// * 电子文件名
-			"doc.fEmailName" : FEmailName,
+			"femailname" : FEmailName,
 			// * 受控号
-			"doc.fConNum" : controllNum,
+			"fconnum" : controllNum,
 			// * 处理情况说明
-			"doc.fDealSituationExp" : FDealSituationExp,
+			"fdealsituationexp" : FDealSituationExp,
 			// 主送
 			/*"doc.mainSupplyDep_FDeptID" : mainSendID,
 			"doc.mainSupplyDep_FDeptCode" : mainSendSortNumber,
@@ -478,10 +480,10 @@ function add() {
 //			"doc.mainSupplyDep_FDeptCode" : readRangeSortNumber,
 //			"doc.mainSupplyDep_FDeptName" : readRange,
 			// 会签
-			"doc.countersigns_FCountersignsID" : "",
-			"doc.countersigns_FCountersignsCode" : "",
+			"countersigns_fcountersignsid" : "",
+			"countersigns_fcountersignscode" : "",
 //			"doc.sendtype" : readsendtype,
-			"doc.countersigns_FCountersignsName" : countersign
+			"countersigns_fcountersignsname" : countersign
 		},
 		dataType : "json",
 		success : function(data) {

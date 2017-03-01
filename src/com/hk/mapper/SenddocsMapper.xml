@@ -134,6 +134,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hk.bean.Senddocs" >
+  	<selectKey resultType="int" order="AFTER" keyProperty="id">
+  		select last_insert_id() 	
+  	</selectKey>
     insert into senddocs (ID, Fdepartment, FdepartmentID, 
       FFiledate, FSecrecy, FNo, 
       Ftitle, FUploadFile, FuploadName, 
