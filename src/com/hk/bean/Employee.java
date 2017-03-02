@@ -22,6 +22,8 @@ public class Employee {
 
 	private Integer roleid;
 
+	private String password;
+
 	private String isdel;
 	private Date startDate;
 	private Date endDate;
@@ -120,6 +122,14 @@ public class Employee {
 
 	public void setRoleid(Integer roleid) {
 		this.roleid = roleid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

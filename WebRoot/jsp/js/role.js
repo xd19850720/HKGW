@@ -16,13 +16,11 @@
 		        {field:'name',title:'角色名称',width:50},
 		        {field:'description',title:'角色描述',width:50}
 	        ]],
-	    onLoadSuccess:function(data){
-	     
-	    },
 	    onDblClickRow:function(rowIndex,rowData){
 	    	var roleId = rowData.roleid;
-	    	
+	    	var roleName = rowData.rolename;    	
 	    	$("#selectPrivilege").dialog("open");
+	    	$('#selectPrivilege').dialog({title: roleName});
 	    	$("#selectedPrivileges").datagrid({
 	    		loadMsg:'数据正在加载...',
 	    	    url:'privilege/getResourcePrivilegeRelate.action', 
@@ -66,6 +64,7 @@
 		    			        						   success:function(msg){
 		    			        							   console.log(msg);
 		    			        							   $("#selectedPrivileges").datagrid('reload');
+		    			        							   $("#selectPrivileges").datagrid('reload');
 		    			        						   }
 		    			        					   });
 		    			        				   }else{
