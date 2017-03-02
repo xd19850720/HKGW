@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 	<!-- 定义统一异常处理器 -->
-	<!-- <bean class="com.kkb.exception.ExceptionResolver"></bean> -->
+	<bean class="com.hk.controller.resolve.ResolveException"></bean> 
 	<!-- 需要导入文件处理类 -->
 	<!-- 上传文件解析器 -->
 	<!-- 文件上传 -->
@@ -76,18 +76,20 @@
 		</property>
 	</bean>
 	
-	<!-- 配置拦截器 
-	<mvc:interceptors>
+	 <!-- 配置拦截器  -->
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
-			/*表示拦截所有的一级URL，表示拦截所一级目录下所以目录 -->
-			<!--<mvc:mapping path="/**"/>
-			<bean class="com.kkb.controller.interceptor.MyInterceptor"></bean>
-		</mvc:interceptor>
-		<mvc:interceptor>-->
-			<!-- /*表示拦截所有的一级URL，/**表示拦截所一级目录下所以目录
+			/*表示拦截所有的一级URL，/**表示拦截所一级目录下所以目录
 			<mvc:mapping path="/**"/>
-			<bean class="com.kkb.controller.interceptor.LoginInterceptor"></bean>
+			<bean class="com.hk.controller.interceptor.SecurityInterceptor">
+				<property name="excludeUrls">
+				</property>
+			</bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
-
+	</mvc:interceptors>  -->
+	<!-- <mvc:default-servlet-handler/> -->
+	<!-- 静态资源访问 -->
+	<!--  <mvc:resources location="/jsp/" mapping="/jsp/**"/>   -->
+	<!--<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>--> 
 </beans>

@@ -25,7 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		$('a[title]').click(function(){
+		$('a[title]').click(function(e){
+			e.preventDefault();
 			var src = $(this).attr('title');
 			var title = $(this).html();
 			if($('#tt').tabs('exists',title)){
@@ -58,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div title="安全管理"  selected="true" style="padding:10px;">
 					    <a title="jsp/resource.jsp">资源管理</a><br>
 					    <a title="jsp/privilege.jsp">权限管理</a><br>
-					    <a title="jsp/role.jsp">角色管理</a>
+					    <a title="jsp/role.jsp" href="#">角色管理</a>
 				    </div>  
 				    <div title="权限管理">  
 				    </div> 

@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<table id="roleTable"></table>
   	</div>
   	<!-- 权限设置 -->
-  	<div id="selectPrivilege"  class="easyui-dialog" closed ="true" modal="true" draggable="false" style="width:800px;height:600px">
+  	<div id="selectPrivilege"  class="easyui-dialog" closed ="true" modal="true" draggable="false"  style="width:800px;height:600px">
   		<div fit="true" collapsible=false class="easyui-layout" id="privilegeLayout" style="width: 100%;height:100%">
   			<div region="west" id="selectedPrivileges" title="已经选择的权限" style="width:400"></div>
   			<div region= "center" id = "selectPrivileges" title="可以选择的权限"></div>

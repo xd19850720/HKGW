@@ -1,8 +1,13 @@
 package com.hk.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -205,4 +210,13 @@ public class PrivilegeHandler {
 		securityService.addPrivilegeIdRelated(roleId, idList);
 		return "添加成功";
 	}
+
+	// 登录逻辑
+	@RequestMapping("/login")
+	public void login(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		request.getSession().setAttribute("user", "user");
+		response.sendRedirect("/HKGW/jsp/main.jsp");
+	}
+
 }
