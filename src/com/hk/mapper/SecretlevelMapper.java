@@ -19,6 +19,8 @@ public interface SecretlevelMapper {
     List<Secretlevel> selectByExample(SecretlevelExample example);
 
     Secretlevel selectByPrimaryKey(Integer id);
+    
+    List<Secretlevel> getAll();
 
     int updateByExampleSelective(@Param("record") Secretlevel record, @Param("example") SecretlevelExample example);
 

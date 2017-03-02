@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><input id="CodeName" name="CodeName"
 					class="easyui-validatebox myinput"
 					style="width: 210px; height: 27px; font-size: 15px; vertical-align: bottom;"
-					type="text" value="惠科" /></td>
+					type="text" value="慧科" /></td>
 			</tr>
 			<tr>
 				<td width="100px" align="right">文件序号：</td>

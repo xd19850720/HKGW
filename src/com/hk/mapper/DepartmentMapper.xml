@@ -64,8 +64,9 @@
     deptID, companyId, companyName, departmentName, departmentCode, isDel
   </sql>
   
-  
-  
+  <select id="getAll" resultType="com.hk.bean.Department">
+  		select * from t_department
+  </select>
   <insert id="insert" parameterType="departmentQuery">
     insert into t_department (deptID, companyId, companyName, 
       departmentName, departmentCode, isDel

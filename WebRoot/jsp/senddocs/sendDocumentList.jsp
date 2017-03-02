@@ -9,14 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
 <title>发文</title>
-	<link rel="stylesheet" type="text/css" href="<%=path %>/css/common.css" />
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery-1.7.2.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
-	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
-
-
+<jsp:include page="/base.jsp"></jsp:include>
 <script language="javascript" type="text/javascript"
 	src="<%=path %>/jsp/js/senddocjs/sendDocumentList.js"></script>
 <script language="javascript" type="text/javascript"
@@ -39,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			width="0"></OBJECT>
 		<a href="#" class="easyui-linkbutton" plain="true" id="print"
 			iconCls="icon-print" onclick="getPrintIds()"
-			style="float: right; display: none">打印</a>
+			style="float: right; display: none">打印2</a>
 		<!-- <a href="#" class="easyui-linkbutton"
 			plain="true" id="exportExcel" iconCls="icon-print"
 			onclick="bringToExcel('sendDocumentList')" style="float: right;">导出Excel</a> -->

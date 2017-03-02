@@ -1,7 +1,7 @@
 $(function() {
 	// 获取密级字段的全部可选信息
 	$('#secretItems').combobox({
-		url : 'SecretLevel_queryAll.do',
+		url : '/HKGW/secretlevel/getAllSecretlevel.action',
 		valueField : 'id',
 		textField : 'name',
 		panelHeight : 110,
@@ -9,7 +9,7 @@ $(function() {
 	});
 	// 获取保密期限的全部可选信息
 	$('#secretPeriod').combobox({
-		url : 'SecretPeriod_quereyAll.do',
+		url : '/HKGW/secretperiod/getAllSecretperiod.action',
 		valueField : 'id',
 		textField : 'name',
 		panelHeight : 110,
@@ -41,29 +41,26 @@ $(function() {
 	// 从接口获取承办人和拟稿人信息
 	$.ajax({
 		type : "POST",
-		url : "ServiceAction_getLoginUser.do",
+		url : "/HKGW/employee/getLoginUser.action",
 		data : "",
 		dataType : 'json',
 		success : function(user) {
 			// 承办人
-			$('#loginPerson').val(user.userName);
-			$('#loginPerson_hidden').val(user.userID);
+			$('#loginPerson').val(user.employeename);
+			$('#loginPerson_hidden').val(user.employeeid);
 			// 拟稿人
-			$('#drafter').val(user.userName);
-			$('#drafter_hidden').val(user.userID);
-		}
-	});
-	// 从接口获取默认承办部门和登记部门
-	$.ajax({
-		type : "POST",
-		url : "ServiceAction_getDefaultDept.do",
-		data : "",
-		dataType : 'json',
-		success : function(user) {
-			$('#org').html(user.deptname);
+			$('#drafter').val(user.employeename);
+			$('#drafter_hidden').val(user.employeeid);
+			
+			
+			$('#org').html(user.employeename);
+			$('#org_hidden').val(user.deptID);
+			$('#loginOrg').html(user.employeename);
+			$('#loginOrg_hidden').val(user.deptID);
+		/*	$('#org').html(user.deptname);
 			$('#org_hidden').val(user.deptID);
 			$('#loginOrg').html(user.deptname);
-			$('#loginOrg_hidden').val(user.deptID);
+			$('#loginOrg_hidden').val(user.deptID);*/
 		}
 	});
 	// 初始化紧急字段
@@ -73,92 +70,11 @@ $(function() {
 		panelHeight : 60,
 		textField : 'text'
 	});
-	// 初始化制度字段
-	$('#fzhidu').combobox({
-		url : 'fzhidu.json',
-		valueField : 'id',
-		panelHeight : 60,
-		textField : 'text'
-	});
-	// 初始化本人档案字段
-	$('#selfFile').combobox({
-		url : 'selfFileData.json',
-		valueField : 'id',
-		panelHeight : 60,
-		textField : 'text'
-	});
 
 });
 // 取消按钮，关闭窗口
 function cancel() {
 	window.close();
-}
-// 为抄送字段赋值
-function mainSendJSP(inputID, jsp) {
-	var resultId = "";
-	var resultText = "";
-	var resultType = "";
-	// var resultSortNum = "";
-	var iTop = (window.screen.availHeight - 600) / 2; // 获得窗口的垂直位置;
-	var iLeft = (window.screen.availWidth - 500) / 2; // 获得窗口的水平位置;
-	var value1 = window.showModalDialog(jsp, inputID, 'dialogHeight=650px;'
-			+ 'dialogWidth=500px;' + 'dialogTop=' + iTop + ';dialogLeft='
-			+ iLeft + ';resizeable=yes;status=no');
-	if (value1 != null) {
-
-		var value = value1[0];
-		var viewData = value1[1];
-
-		if (value) {
-			if (viewData.length > 0)
-				viewData = viewData + "、";
-			if ("datagride" == value.state) {
-				resultId = value.id;
-				resultText = viewData + value.name;
-				resultType = 0;
-				// resultSortNum = value.sortnumber;
-			} else {
-				resultText = "、" + viewData;
-				for ( var i = 0; i < value.length; i++) {
-					var tmp_type = "";
-					if ("isFile" == value[i].isFile) {
-						tmp_type = "2";
-					} else if ("is_top_File" == value[i].isFile) {
-						tmp_type = "3";
-					} else {
-						tmp_type = "1";
-					}
-
-					resultId += "，" + value[i].id;
-					// resultSortNum += "，" + value[i].sortnumber;
-					resultText += value[i].text + "、";
-					resultType += "," + tmp_type;
-				}
-				if (resultId.length > 0)
-					resultId = resultId.substring(1);
-				if (resultText.length > 0) {
-					resultText = resultText.substring(1);
-					resultText = resultText.substring(0, resultText.length - 1);
-				}
-				// if (resultSortNum.length > 0)
-				// resultSortNum = resultSortNum.substring(1);
-				if (resultType.length > 0)
-					resultType = resultType.substring(1);
-			}
-			document.getElementById(inputID + '_hidden').value = resultId;
-			document.getElementById(inputID).value = resultText + "、存档";
-			document.getElementById(inputID + '_hidden' + '_type').value = resultType;
-			// document.getElementById(inputID + '_hidden' +
-			// '_sortnumber').value = resultSortNum;
-		} else {
-			if (viewData.length > 0) {
-				document.getElementById(inputID).value = viewData + "、" + "存档";
-			} else {
-				document.getElementById(inputID).value = "存档";
-			}
-		}
-	}
-
 }
 // 设置承办部门
 function selectDepJSP(inputID) {
@@ -178,7 +94,6 @@ function selectDepJSP(inputID) {
 }
 // 生成文件字号
 function setFileNum(inputID) {
-	alert(inputID);
 	var iTop = (window.screen.availHeight - 255) / 2; // 获得窗口的垂直位置;
 	var iLeft = (window.screen.availWidth - 350) / 2; // 获得窗口的水平位置;
 	var value = window.showModalDialog('createFileNum.jsp', '',
@@ -187,15 +102,6 @@ function setFileNum(inputID) {
 	if (value != "非正常关闭") {
 		document.getElementById(inputID).value = value;
 	}
-}
-// 弃用代码
-function selectPersons() {
-	var iTop = (window.screen.availHeight - 400) / 2; // 获得窗口的垂直位置;
-	var iLeft = (window.screen.availWidth - 450) / 2; // 获得窗口的水平位置;
-	var value = window.showModalDialog('selectPersons.jsp', '',
-			'dialogHeight=400px;' + 'dialogWidth=450px;' + 'dialogTop=' + iTop
-					+ ';dialogLeft=' + iLeft + ';resizeable=yes;status=no');
-
 }
 // 增加信息
 function add() {
@@ -501,93 +407,28 @@ function add() {
 
 }
 
-//可传阅范围
-function forMainSendJSP2(inputID,mainSend,type) {
-	var iTop = (window.screen.availHeight - 600) / 2; // 获得窗口的垂直位置;
-	var iLeft = (window.screen.availWidth - 500) / 2; // 获得窗口的水平位置;
-	var value = window.showModalDialog(mainSend, inputID,
-			'dialogHeight=650px;' + 'dialogWidth=500px;' + 'dialogTop=' + iTop
-					+ ';dialogLeft=' + iLeft + ';resizeable=yes;status=no');
-	if (value != null) {
-		data = value.split(';');
-		var resultId = data[0];
-		var resultText = data[1];
-		var resultType = data[2];
-		
-		var myId=document.getElementById(inputID + '_hidden').value;
-		var inputText=$('#'+inputID).text();
-		var inputType=document.getElementById(inputID + '_hidden' + '_type').value;
-		if(!myId){
-			resultId=resultId.substring(1);
-			resultText=resultText.substring(1);
-			resultType=resultType.substring(1);
-		}
-		if(myId&&myId.substring(0,1)=="，"){
-			myId=myId.substring(1);
-			inputText=inputText.substring(1);
-			inputType=inputType.substring(1);
-		}
-		document.getElementById(inputID + '_hidden').value = myId + resultId;
-		$('#'+inputID).text(inputText+resultText);
-		document.getElementById(inputID + '_hidden' + '_type').value = inputType + resultType;
-		var sendtype=0;
-		if(type!=-1){
-			sendtype=1;
-		}
-		document.getElementById(inputID + '_hidden' + '_sendtype').value = sendtype;
-	}
-}
-	
-
 // 主送信息
 function forMainSendJSP(inputID,mainSend) {
 	var resultId = "";
 	var resultText = "";
-	var resultType = "";
-	// var resultSortNum = "";
 	var iTop = (window.screen.availHeight - 600) / 2; // 获得窗口的垂直位置;
 	var iLeft = (window.screen.availWidth - 500) / 2; // 获得窗口的水平位置;
 	var value = window.showModalDialog(mainSend, inputID,
 			'dialogHeight=650px;' + 'dialogWidth=500px;' + 'dialogTop=' + iTop
 					+ ';dialogLeft=' + iLeft + ';resizeable=yes;status=no');
 	if (value != null) {
-		if ("datagride" == value.state) {
-			resultId = value.id;
-			resultText = value.name;
-			resultType = 0;
-		} else {
-			for ( var i = 0; i < value.length; i++) {
-				var tmp_type = "";
-				if ("isFile" == value[i].isFile) {
-					tmp_type = "2";
-				} else if ("is_top_File" == value[i].isFile) {
-					tmp_type = "3";
-				} else {
-					tmp_type = "1";
-				}
-				if (i < value.length - 1) {
-					resultId += value[i].id + "，";
-					resultText += value[i].text + "、";
-					resultType += tmp_type + ",";
-				} else {
-					resultId += value[i].id;
-					resultText += value[i].text;
-					resultType += tmp_type;
-				}
+		for(var i=0;i<value.length;i++){
+			if (i < value.length - 1) {
+				resultId += value[i].id + ",";
+				resultText += value[i].departmentname + ",";
+			} else {
+				resultId += value[i].id;
+				resultText += value[i].departmentname;
 			}
 		}
-		
-		if(inputID=='readRange'){
-			$('#'+inputID).text(resultText);
-		}else{
-			document.getElementById(inputID).value = resultText;
-		}
-			
 		document.getElementById(inputID + '_hidden').value = resultId;
 		document.getElementById(inputID).value = resultText;
 		document.getElementById(inputID + '_hidden' + '_type').value = resultType;
-		// document.getElementById(inputID + '_hidden' + '_sortnumber').value =
-		// resultSortNum;
 	}
 
 }

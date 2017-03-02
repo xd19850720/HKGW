@@ -19,6 +19,8 @@ public interface SecretperiodMapper {
     List<Secretperiod> selectByExample(SecretperiodExample example);
 
     Secretperiod selectByPrimaryKey(Integer id);
+    
+    List<Secretperiod> getAll();
 
     int updateByExampleSelective(@Param("record") Secretperiod record, @Param("example") SecretperiodExample example);
 

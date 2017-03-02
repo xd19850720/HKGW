@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hk.bean.Employee;
 import com.hk.bean.EmployeeQuery;
 import com.hk.service.EmployeeService;
 
@@ -71,4 +76,16 @@ public class EmployeeHandler {
 	Map<String, Object> getEmployeesByConditions(EmployeeQuery query) {
 		return employeeService.getEmployeesByConditions(query);
 	}
+	
+	
+	@RequestMapping("/getLoginUser")
+	public @ResponseBody
+	EmployeeQuery getLoginUser(HttpServletRequest request,HttpServletResponse response) {
+		  HttpSession session = request.getSession();
+		  EmployeeQuery employeeQuery = new EmployeeQuery();
+		  employeeQuery.setEmployeename("张三丰");
+		  session.setAttribute("user", employeeQuery);
+		  return  employeeQuery;
+	}
+	
 }

@@ -53,6 +53,64 @@
 	background:url('icons/tip.png') no-repeat;
 }
 
+.icon-gw-add{
+	background:url('icons/gw/add.png') no-repeat;
+}
+.icon-gw-attach{
+	background:url('icons/gw/attach.png') no-repeat;
+}
+.icon-gw-backup{
+	background:url('icons/gw/backup.png') no-repeat;
+}
+.icon-gw-book_add{
+	background:url('icons/gw/book_add.png') no-repeat;
+}
+.icon-gw-delete{
+	background:url('icons/gw/delete.png') no-repeat;
+}
+.icon-gw-EditInformationHS{
+	background:url('icons/gw/EditInformationHS.png') no-repeat;
+}
+.icon-gw-folder_add{
+	background:url('icons/gw/folder_add.png') no-repeat;
+}
+.icon-gw-save{
+	background:url('icons/gw/save.png') no-repeat;
+}
+.icon-gw-printpreview{
+	background:url('icons/gw/printpreview.png') no-repeat;
+}
+.icon-gw-print{
+	background:url('icons/gw/print.png') no-repeat;
+}
+.icon-gw-page_excel{
+	background:url('icons/gw/page_excel.png') no-repeat;
+}
+.icon-gw-Loan{
+	background:url('icons/gw/Loan.png') no-repeat;
+}
+.icon-gw-lock{
+	background:url('icons/gw/lock.png') no-repeat;
+}
+.icon-gw-grouping{
+	background:url('icons/gw/grouping.png') no-repeat;
+}
+.icon-gw-modify{
+	background:url('icons/gw/modify.png') no-repeat;
+}
+.icon-gw-MoveToFolderHS{
+	background:url('icons/gw/MoveToFolderHS.png') no-repeat;
+}
+.icon-gw-Transfer{
+	background:url('icons/gw/Transfer.png') no-repeat;
+}
+.icon-gw-zhengwen{
+	background:url('icons/gw/zhengwen.png') no-repeat;
+}
+.icon-gw-jieyue{
+	background:url('icons/gw/jieyue.png') no-repeat;
+}
+
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat 2px 2px;
 }

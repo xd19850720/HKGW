@@ -254,7 +254,7 @@ $(function() {
 						toolbar : [{
 							id : "printfile",
 							text : '打印',
-							iconCls : 'icon-gw-print	',
+							iconCls : 'icon-gw-print',
 							handler : printfile
 						},{
 							text : '导出Excel',
