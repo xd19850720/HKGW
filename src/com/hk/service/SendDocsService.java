@@ -10,5 +10,6 @@ public interface SendDocsService {
 
 	public List<Senddocs> getAllDocs();
 	public void add(Senddocs docs);
+	public void delete(Integer id);
 
 }

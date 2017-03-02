@@ -145,9 +145,9 @@
       FNuclearDraft, FNuclearDraftID, Faudit, 
       FauditID, Fcountersign, FIssuer, 
       FIssuerID, FLazy, FRemark, 
-      FMainBodyId, FModelId, FDocumentStatus, 
-      FCopyDepartments, FMainSupplyDep, isdel, 
-      FkeyWord)
+      FMainBodyId,  FDocumentStatus, 
+      FCopyDepartments, FMainSupplyDep, isdel 
+      )
     values (#{id,jdbcType=INTEGER}, #{fdepartment,jdbcType=VARCHAR}, #{fdepartmentid,jdbcType=VARCHAR}, 
       #{ffiledate,jdbcType=TIMESTAMP}, #{fsecrecy,jdbcType=INTEGER}, #{fno,jdbcType=VARCHAR}, 
       #{ftitle,jdbcType=VARCHAR}, #{fuploadfile,jdbcType=VARCHAR}, #{fuploadname,jdbcType=VARCHAR}, 
@@ -156,9 +156,8 @@
       #{fnucleardraft,jdbcType=VARCHAR}, #{fnucleardraftid,jdbcType=VARCHAR}, #{faudit,jdbcType=VARCHAR}, 
       #{fauditid,jdbcType=VARCHAR}, #{fcountersign,jdbcType=VARCHAR}, #{fissuer,jdbcType=VARCHAR}, 
       #{fissuerid,jdbcType=VARCHAR}, #{flazy,jdbcType=VARCHAR}, #{fremark,jdbcType=VARCHAR}, 
-      #{fmainbodyid,jdbcType=INTEGER}, #{fmodelid,jdbcType=INTEGER}, #{fdocumentstatus,jdbcType=VARCHAR}, 
-      #{fcopydepartments,jdbcType=VARCHAR}, #{fmainsupplydep,jdbcType=VARCHAR}, #{isdel,jdbcType=CHAR}, 
-      #{fkeyword,jdbcType=VARCHAR})
+      #{fmainbodyid,jdbcType=INTEGER}, #{fdocumentstatus,jdbcType=VARCHAR}, 
+      #{fcopydepartments,jdbcType=VARCHAR}, #{fmainsupplydep,jdbcType=VARCHAR}, #{isdel,jdbcType=CHAR} )
   </insert>
   <insert id="insertSelective" parameterType="com.hk.bean.Senddocs" >
     insert into senddocs

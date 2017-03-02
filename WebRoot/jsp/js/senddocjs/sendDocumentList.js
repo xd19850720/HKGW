@@ -145,7 +145,7 @@ $(function() {
 									field : 'fCreateDate',
 									title : '登记日期',
 									width : 60,
-									//formatter : formatTimeStr,
+//									formatter : formatTimeStr,
 									hidden : true
 								}, {
 									field : 'ftypeName',
@@ -173,12 +173,12 @@ $(function() {
 									width : 100,
 									hidden : true
 								}, {
-									field : 'fMainSupplyDep',
+									field : 'fmainsupplydep',
 									title : '主送',
 									width : 150,
 									sortable : true
 								}, {
-									field : 'fCopyDepartments',
+									field : 'fcopydepartments',
 									title : '抄送',
 									width : 150,
 									sortable : true
@@ -205,7 +205,7 @@ $(function() {
 									width : 60,
 									hidden : true
 								}, {
-									field : 'fIssuer',
+									field : 'fissuer',
 									title : '签发人',
 									width : 100,
 									sortable : true
@@ -921,12 +921,12 @@ function refresh() {
 function delItems() {
 	var row = $("#sendDocumentList").datagrid('getSelected');
 	if (row) {
-		var status = row.fDocumentStatus;
+		var status = row.fdocumentstatus;
 		if (status == "草稿") {
 			$.messager.confirm('删除', '确认删除吗？', function(r) {
 				if (r) {
 					$.ajax({
-						url : 'DocumentDealAction_deleteItem.do',
+						url : '/HKGW/sendDocs/deletedoc.action',
 						type : "POST",
 						data : {
 							id : row.id

@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					onclick="forMainSendJSP('mainSend','mainSend.jsp')">设置主送</a> <a
 					class="easyui-linkbutton" plain="true" iconCls="icon-edit"
 					onclick="forMainSendJSP('duplicateSend','mainSend.jsp')">设置抄送</a>
-					<a style="float: right;" plain="true" class="easyui-linkbutton"
+					<a id="button" style="float: right;" plain="true" class="easyui-linkbutton"
 					iconcls="icon-save" onclick="return add()">保存</a>
 			</div>
 
@@ -164,16 +164,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="datagrid-mask-msg" id="readme"
 					style="display: none; left: 360px; top: 232.5px;">正在处理，请稍待。。。</div>
 			</div>
-			<!-- <div style="display: none" closed="true">
-				<tr style="height: 20px;">
-					<td align="right">存档&nbsp;&nbsp;</td>
-					<td class="white"><span id="file" name="file" class="myinput"
-						style="">是</span>
-					<td align="right">本人档案&nbsp;&nbsp;</td>
-					<td class="white"><input id="selfFile" name="selfFile"
-						class="myinput" style="" />
-				</tr>
-			</div> -->
 		</div>
 	</div>
 </body>

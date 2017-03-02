@@ -23,6 +23,10 @@
 				field : 'ck',
 				checkbox : 'true'
 			}, {
+				field : 'deptid',
+				title : 'id',
+				width : 100
+			}, {
 				field : 'departmentname',
 				title : '名称',
 				width : 100

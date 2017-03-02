@@ -32,5 +32,10 @@ public class SendDocsServiceImpl implements SendDocsService {
 		senddocsMapper.insert(docs);
 	}
 
+	@Override
+	public void delete(Integer id) {
+		senddocsMapper.deleteByPrimaryKey(id);
+	}
+
 	
 }

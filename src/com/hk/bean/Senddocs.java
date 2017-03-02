@@ -53,19 +53,34 @@ public class Senddocs {
 
     private Integer fmainbodyid;
 
-    private Integer fmodelid;
 
     private String fdocumentstatus;
 
     private String fcopydepartments;
+    private String fcopydepartmentsid;
 
     private String fmainsupplydep;
+    private String fmainsupplydepid;
 
-    private String isdel;
+    private String isdel = "0";
 
-    private String fkeyword;
+    public String getFcopydepartmentsid() {
+		return fcopydepartmentsid;
+	}
 
-    public Integer getId() {
+	public void setFcopydepartmentsid(String fcopydepartmentsid) {
+		this.fcopydepartmentsid = fcopydepartmentsid;
+	}
+
+	public String getFmainsupplydepid() {
+		return fmainsupplydepid;
+	}
+
+	public void setFmainsupplydepid(String fmainsupplydepid) {
+		this.fmainsupplydepid = fmainsupplydepid;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -265,13 +280,6 @@ public class Senddocs {
         this.fmainbodyid = fmainbodyid;
     }
 
-    public Integer getFmodelid() {
-        return fmodelid;
-    }
-
-    public void setFmodelid(Integer fmodelid) {
-        this.fmodelid = fmodelid;
-    }
 
     public String getFdocumentstatus() {
         return fdocumentstatus;
@@ -305,11 +313,4 @@ public class Senddocs {
         this.isdel = isdel == null ? null : isdel.trim();
     }
 
-    public String getFkeyword() {
-        return fkeyword;
-    }
-
-    public void setFkeyword(String fkeyword) {
-        this.fkeyword = fkeyword == null ? null : fkeyword.trim();
-    }
 }

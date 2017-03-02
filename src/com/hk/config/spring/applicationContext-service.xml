@@ -23,4 +23,5 @@
 	<bean id="sendDocsService" class="com.hk.service.impl.SendDocsServiceImpl"></bean>
 	<bean id="secretperiodService" class="com.hk.service.impl.SecretperiodServiceImpl"></bean>
 	<bean id="secretlevelService" class="com.hk.service.impl.SecretlevelServiceImpl"></bean>
+	<bean id="mainsupplydepService" class="com.hk.service.impl.MainsupplydepServiceImpl"></bean>
 </beans>
