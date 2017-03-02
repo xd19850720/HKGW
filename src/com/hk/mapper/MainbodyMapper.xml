@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hk.mapper.MainbodyMapper" >
+  <resultMap id="BaseResultMap" type="com.hk.bean.Mainbody" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FCode" property="fcode" jdbcType="INTEGER" />
+    <result column="FFileName" property="ffilename" jdbcType="VARCHAR" />
+    <result column="FFilePath" property="ffilepath" jdbcType="VARCHAR" />
+    <result column="isDel" property="isdel" jdbcType="CHAR" />
+    <result column="FFileNameView" property="ffilenameview" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FCode, FFileName, FFilePath, isDel, FFileNameView
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hk.bean.MainbodyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mainbody
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mainbody
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mainbody
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hk.bean.MainbodyExample" >
+    delete from mainbody
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hk.bean.Mainbody" >
+    insert into mainbody (ID, FCode, FFileName, 
+      FFilePath, isDel, FFileNameView
+      )
+    values (#{id,jdbcType=INTEGER}, #{fcode,jdbcType=INTEGER}, #{ffilename,jdbcType=VARCHAR}, 
+      #{ffilepath,jdbcType=VARCHAR}, #{isdel,jdbcType=CHAR}, #{ffilenameview,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hk.bean.Mainbody" >
+    insert into mainbody
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fcode != null" >
+        FCode,
+      </if>
+      <if test="ffilename != null" >
+        FFileName,
+      </if>
+      <if test="ffilepath != null" >
+        FFilePath,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+      <if test="ffilenameview != null" >
+        FFileNameView,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fcode != null" >
+        #{fcode,jdbcType=INTEGER},
+      </if>
+      <if test="ffilename != null" >
+        #{ffilename,jdbcType=VARCHAR},
+      </if>
+      <if test="ffilepath != null" >
+        #{ffilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=CHAR},
+      </if>
+      <if test="ffilenameview != null" >
+        #{ffilenameview,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hk.bean.MainbodyExample" resultType="java.lang.Integer" >
+    select count(*) from mainbody
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mainbody
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcode != null" >
+        FCode = #{record.fcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.ffilename != null" >
+        FFileName = #{record.ffilename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ffilepath != null" >
+        FFilePath = #{record.ffilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdel != null" >
+        isDel = #{record.isdel,jdbcType=CHAR},
+      </if>
+      <if test="record.ffilenameview != null" >
+        FFileNameView = #{record.ffilenameview,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mainbody
+    set ID = #{record.id,jdbcType=INTEGER},
+      FCode = #{record.fcode,jdbcType=INTEGER},
+      FFileName = #{record.ffilename,jdbcType=VARCHAR},
+      FFilePath = #{record.ffilepath,jdbcType=VARCHAR},
+      isDel = #{record.isdel,jdbcType=CHAR},
+      FFileNameView = #{record.ffilenameview,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hk.bean.Mainbody" >
+    update mainbody
+    <set >
+      <if test="fcode != null" >
+        FCode = #{fcode,jdbcType=INTEGER},
+      </if>
+      <if test="ffilename != null" >
+        FFileName = #{ffilename,jdbcType=VARCHAR},
+      </if>
+      <if test="ffilepath != null" >
+        FFilePath = #{ffilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=CHAR},
+      </if>
+      <if test="ffilenameview != null" >
+        FFileNameView = #{ffilenameview,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hk.bean.Mainbody" >
+    update mainbody
+    set FCode = #{fcode,jdbcType=INTEGER},
+      FFileName = #{ffilename,jdbcType=VARCHAR},
+      FFilePath = #{ffilepath,jdbcType=VARCHAR},
+      isDel = #{isdel,jdbcType=CHAR},
+      FFileNameView = #{ffilenameview,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

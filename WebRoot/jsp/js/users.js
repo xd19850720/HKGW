@@ -266,22 +266,6 @@
 		textField:'text'
 	});
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	$("#searchUserCancleBtn").click(function(){
 		$('#searchEmployeeForm').get(0).reset();
 	});

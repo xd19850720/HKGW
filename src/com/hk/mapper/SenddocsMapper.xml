@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hk.mapper.SenddocsMapper" >
+  <resultMap id="BaseResultMap" type="com.hk.bean.Senddocs" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Fdepartment" property="fdepartment" jdbcType="VARCHAR" />
+    <result column="FdepartmentID" property="fdepartmentid" jdbcType="VARCHAR" />
+    <result column="FFiledate" property="ffiledate" jdbcType="TIMESTAMP" />
+    <result column="FSecrecy" property="fsecrecy" jdbcType="INTEGER" />
+    <result column="FNo" property="fno" jdbcType="VARCHAR" />
+    <result column="Ftitle" property="ftitle" jdbcType="VARCHAR" />
+    <result column="FUploadFile" property="fuploadfile" jdbcType="VARCHAR" />
+    <result column="FuploadName" property="fuploadname" jdbcType="VARCHAR" />
+    <result column="FuploadNumer" property="fuploadnumer" jdbcType="INTEGER" />
+    <result column="FSecrecyLevel" property="fsecrecylevel" jdbcType="INTEGER" />
+    <result column="Fcarrier" property="fcarrier" jdbcType="VARCHAR" />
+    <result column="FcarrierID" property="fcarrierid" jdbcType="VARCHAR" />
+    <result column="FDraftPeople" property="fdraftpeople" jdbcType="VARCHAR" />
+    <result column="FDraftPeopleID" property="fdraftpeopleid" jdbcType="VARCHAR" />
+    <result column="FNuclearDraft" property="fnucleardraft" jdbcType="VARCHAR" />
+    <result column="FNuclearDraftID" property="fnucleardraftid" jdbcType="VARCHAR" />
+    <result column="Faudit" property="faudit" jdbcType="VARCHAR" />
+    <result column="FauditID" property="fauditid" jdbcType="VARCHAR" />
+    <result column="Fcountersign" property="fcountersign" jdbcType="VARCHAR" />
+    <result column="FIssuer" property="fissuer" jdbcType="VARCHAR" />
+    <result column="FIssuerID" property="fissuerid" jdbcType="VARCHAR" />
+    <result column="FLazy" property="flazy" jdbcType="VARCHAR" />
+    <result column="FRemark" property="fremark" jdbcType="VARCHAR" />
+    <result column="FMainBodyId" property="fmainbodyid" jdbcType="INTEGER" />
+    <result column="FModelId" property="fmodelid" jdbcType="INTEGER" />
+    <result column="FDocumentStatus" property="fdocumentstatus" jdbcType="VARCHAR" />
+    <result column="FCopyDepartments" property="fcopydepartments" jdbcType="VARCHAR" />
+    <result column="FMainSupplyDep" property="fmainsupplydep" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="CHAR" />
+    <result column="FkeyWord" property="fkeyword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Fdepartment, FdepartmentID, FFiledate, FSecrecy, FNo, Ftitle, FUploadFile, FuploadName, 
+    FuploadNumer, FSecrecyLevel, Fcarrier, FcarrierID, FDraftPeople, FDraftPeopleID, 
+    FNuclearDraft, FNuclearDraftID, Faudit, FauditID, Fcountersign, FIssuer, FIssuerID, 
+    FLazy, FRemark, FMainBodyId, FModelId, FDocumentStatus, FCopyDepartments, FMainSupplyDep, 
+    isdel, FkeyWord
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hk.bean.SenddocsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from senddocs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select * from senddocs
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from senddocs
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from senddocs
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hk.bean.SenddocsExample" >
+    delete from senddocs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hk.bean.Senddocs" >
+  	<selectKey resultType="int" order="AFTER" keyProperty="id">
+  		select last_insert_id() 	
+  	</selectKey>
+    insert into senddocs (ID, Fdepartment, FdepartmentID, 
+      FFiledate, FSecrecy, FNo, 
+      Ftitle, FUploadFile, FuploadName, 
+      FuploadNumer, FSecrecyLevel, Fcarrier, 
+      FcarrierID, FDraftPeople, FDraftPeopleID, 
+      FNuclearDraft, FNuclearDraftID, Faudit, 
+      FauditID, Fcountersign, FIssuer, 
+      FIssuerID, FLazy, FRemark, 
+      FMainBodyId, FModelId, FDocumentStatus, 
+      FCopyDepartments, FMainSupplyDep, isdel, 
+      FkeyWord)
+    values (#{id,jdbcType=INTEGER}, #{fdepartment,jdbcType=VARCHAR}, #{fdepartmentid,jdbcType=VARCHAR}, 
+      #{ffiledate,jdbcType=TIMESTAMP}, #{fsecrecy,jdbcType=INTEGER}, #{fno,jdbcType=VARCHAR}, 
+      #{ftitle,jdbcType=VARCHAR}, #{fuploadfile,jdbcType=VARCHAR}, #{fuploadname,jdbcType=VARCHAR}, 
+      #{fuploadnumer,jdbcType=INTEGER}, #{fsecrecylevel,jdbcType=INTEGER}, #{fcarrier,jdbcType=VARCHAR}, 
+      #{fcarrierid,jdbcType=VARCHAR}, #{fdraftpeople,jdbcType=VARCHAR}, #{fdraftpeopleid,jdbcType=VARCHAR}, 
+      #{fnucleardraft,jdbcType=VARCHAR}, #{fnucleardraftid,jdbcType=VARCHAR}, #{faudit,jdbcType=VARCHAR}, 
+      #{fauditid,jdbcType=VARCHAR}, #{fcountersign,jdbcType=VARCHAR}, #{fissuer,jdbcType=VARCHAR}, 
+      #{fissuerid,jdbcType=VARCHAR}, #{flazy,jdbcType=VARCHAR}, #{fremark,jdbcType=VARCHAR}, 
+      #{fmainbodyid,jdbcType=INTEGER}, #{fmodelid,jdbcType=INTEGER}, #{fdocumentstatus,jdbcType=VARCHAR}, 
+      #{fcopydepartments,jdbcType=VARCHAR}, #{fmainsupplydep,jdbcType=VARCHAR}, #{isdel,jdbcType=CHAR}, 
+      #{fkeyword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hk.bean.Senddocs" >
+    insert into senddocs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fdepartment != null" >
+        Fdepartment,
+      </if>
+      <if test="fdepartmentid != null" >
+        FdepartmentID,
+      </if>
+      <if test="ffiledate != null" >
+        FFiledate,
+      </if>
+      <if test="fsecrecy != null" >
+        FSecrecy,
+      </if>
+      <if test="fno != null" >
+        FNo,
+      </if>
+      <if test="ftitle != null" >
+        Ftitle,
+      </if>
+      <if test="fuploadfile != null" >
+        FUploadFile,
+      </if>
+      <if test="fuploadname != null" >
+        FuploadName,
+      </if>
+      <if test="fuploadnumer != null" >
+        FuploadNumer,
+      </if>
+      <if test="fsecrecylevel != null" >
+        FSecrecyLevel,
+      </if>
+      <if test="fcarrier != null" >
+        Fcarrier,
+      </if>
+      <if test="fcarrierid != null" >
+        FcarrierID,
+      </if>
+      <if test="fdraftpeople != null" >
+        FDraftPeople,
+      </if>
+      <if test="fdraftpeopleid != null" >
+        FDraftPeopleID,
+      </if>
+      <if test="fnucleardraft != null" >
+        FNuclearDraft,
+      </if>
+      <if test="fnucleardraftid != null" >
+        FNuclearDraftID,
+      </if>
+      <if test="faudit != null" >
+        Faudit,
+      </if>
+      <if test="fauditid != null" >
+        FauditID,
+      </if>
+      <if test="fcountersign != null" >
+        Fcountersign,
+      </if>
+      <if test="fissuer != null" >
+        FIssuer,
+      </if>
+      <if test="fissuerid != null" >
+        FIssuerID,
+      </if>
+      <if test="flazy != null" >
+        FLazy,
+      </if>
+      <if test="fremark != null" >
+        FRemark,
+      </if>
+      <if test="fmainbodyid != null" >
+        FMainBodyId,
+      </if>
+      <if test="fmodelid != null" >
+        FModelId,
+      </if>
+      <if test="fdocumentstatus != null" >
+        FDocumentStatus,
+      </if>
+      <if test="fcopydepartments != null" >
+        FCopyDepartments,
+      </if>
+      <if test="fmainsupplydep != null" >
+        FMainSupplyDep,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="fkeyword != null" >
+        FkeyWord,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fdepartment != null" >
+        #{fdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="fdepartmentid != null" >
+        #{fdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="ffiledate != null" >
+        #{ffiledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fsecrecy != null" >
+        #{fsecrecy,jdbcType=INTEGER},
+      </if>
+      <if test="fno != null" >
+        #{fno,jdbcType=VARCHAR},
+      </if>
+      <if test="ftitle != null" >
+        #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadfile != null" >
+        #{fuploadfile,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadname != null" >
+        #{fuploadname,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadnumer != null" >
+        #{fuploadnumer,jdbcType=INTEGER},
+      </if>
+      <if test="fsecrecylevel != null" >
+        #{fsecrecylevel,jdbcType=INTEGER},
+      </if>
+      <if test="fcarrier != null" >
+        #{fcarrier,jdbcType=VARCHAR},
+      </if>
+      <if test="fcarrierid != null" >
+        #{fcarrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="fdraftpeople != null" >
+        #{fdraftpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="fdraftpeopleid != null" >
+        #{fdraftpeopleid,jdbcType=VARCHAR},
+      </if>
+      <if test="fnucleardraft != null" >
+        #{fnucleardraft,jdbcType=VARCHAR},
+      </if>
+      <if test="fnucleardraftid != null" >
+        #{fnucleardraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="faudit != null" >
+        #{faudit,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditid != null" >
+        #{fauditid,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersign != null" >
+        #{fcountersign,jdbcType=VARCHAR},
+      </if>
+      <if test="fissuer != null" >
+        #{fissuer,jdbcType=VARCHAR},
+      </if>
+      <if test="fissuerid != null" >
+        #{fissuerid,jdbcType=VARCHAR},
+      </if>
+      <if test="flazy != null" >
+        #{flazy,jdbcType=VARCHAR},
+      </if>
+      <if test="fremark != null" >
+        #{fremark,jdbcType=VARCHAR},
+      </if>
+      <if test="fmainbodyid != null" >
+        #{fmainbodyid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodelid != null" >
+        #{fmodelid,jdbcType=INTEGER},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fcopydepartments != null" >
+        #{fcopydepartments,jdbcType=VARCHAR},
+      </if>
+      <if test="fmainsupplydep != null" >
+        #{fmainsupplydep,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=CHAR},
+      </if>
+      <if test="fkeyword != null" >
+        #{fkeyword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hk.bean.SenddocsExample" resultType="java.lang.Integer" >
+    select count(*) from senddocs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update senddocs
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdepartment != null" >
+        Fdepartment = #{record.fdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdepartmentid != null" >
+        FdepartmentID = #{record.fdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ffiledate != null" >
+        FFiledate = #{record.ffiledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fsecrecy != null" >
+        FSecrecy = #{record.fsecrecy,jdbcType=INTEGER},
+      </if>
+      <if test="record.fno != null" >
+        FNo = #{record.fno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftitle != null" >
+        Ftitle = #{record.ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuploadfile != null" >
+        FUploadFile = #{record.fuploadfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuploadname != null" >
+        FuploadName = #{record.fuploadname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuploadnumer != null" >
+        FuploadNumer = #{record.fuploadnumer,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsecrecylevel != null" >
+        FSecrecyLevel = #{record.fsecrecylevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcarrier != null" >
+        Fcarrier = #{record.fcarrier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcarrierid != null" >
+        FcarrierID = #{record.fcarrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdraftpeople != null" >
+        FDraftPeople = #{record.fdraftpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdraftpeopleid != null" >
+        FDraftPeopleID = #{record.fdraftpeopleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fnucleardraft != null" >
+        FNuclearDraft = #{record.fnucleardraft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fnucleardraftid != null" >
+        FNuclearDraftID = #{record.fnucleardraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faudit != null" >
+        Faudit = #{record.faudit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauditid != null" >
+        FauditID = #{record.fauditid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcountersign != null" >
+        Fcountersign = #{record.fcountersign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fissuer != null" >
+        FIssuer = #{record.fissuer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fissuerid != null" >
+        FIssuerID = #{record.fissuerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flazy != null" >
+        FLazy = #{record.flazy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fremark != null" >
+        FRemark = #{record.fremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmainbodyid != null" >
+        FMainBodyId = #{record.fmainbodyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodelid != null" >
+        FModelId = #{record.fmodelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        FDocumentStatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcopydepartments != null" >
+        FCopyDepartments = #{record.fcopydepartments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmainsupplydep != null" >
+        FMainSupplyDep = #{record.fmainsupplydep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdel != null" >
+        isdel = #{record.isdel,jdbcType=CHAR},
+      </if>
+      <if test="record.fkeyword != null" >
+        FkeyWord = #{record.fkeyword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update senddocs
+    set ID = #{record.id,jdbcType=INTEGER},
+      Fdepartment = #{record.fdepartment,jdbcType=VARCHAR},
+      FdepartmentID = #{record.fdepartmentid,jdbcType=VARCHAR},
+      FFiledate = #{record.ffiledate,jdbcType=TIMESTAMP},
+      FSecrecy = #{record.fsecrecy,jdbcType=INTEGER},
+      FNo = #{record.fno,jdbcType=VARCHAR},
+      Ftitle = #{record.ftitle,jdbcType=VARCHAR},
+      FUploadFile = #{record.fuploadfile,jdbcType=VARCHAR},
+      FuploadName = #{record.fuploadname,jdbcType=VARCHAR},
+      FuploadNumer = #{record.fuploadnumer,jdbcType=INTEGER},
+      FSecrecyLevel = #{record.fsecrecylevel,jdbcType=INTEGER},
+      Fcarrier = #{record.fcarrier,jdbcType=VARCHAR},
+      FcarrierID = #{record.fcarrierid,jdbcType=VARCHAR},
+      FDraftPeople = #{record.fdraftpeople,jdbcType=VARCHAR},
+      FDraftPeopleID = #{record.fdraftpeopleid,jdbcType=VARCHAR},
+      FNuclearDraft = #{record.fnucleardraft,jdbcType=VARCHAR},
+      FNuclearDraftID = #{record.fnucleardraftid,jdbcType=VARCHAR},
+      Faudit = #{record.faudit,jdbcType=VARCHAR},
+      FauditID = #{record.fauditid,jdbcType=VARCHAR},
+      Fcountersign = #{record.fcountersign,jdbcType=VARCHAR},
+      FIssuer = #{record.fissuer,jdbcType=VARCHAR},
+      FIssuerID = #{record.fissuerid,jdbcType=VARCHAR},
+      FLazy = #{record.flazy,jdbcType=VARCHAR},
+      FRemark = #{record.fremark,jdbcType=VARCHAR},
+      FMainBodyId = #{record.fmainbodyid,jdbcType=INTEGER},
+      FModelId = #{record.fmodelid,jdbcType=INTEGER},
+      FDocumentStatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      FCopyDepartments = #{record.fcopydepartments,jdbcType=VARCHAR},
+      FMainSupplyDep = #{record.fmainsupplydep,jdbcType=VARCHAR},
+      isdel = #{record.isdel,jdbcType=CHAR},
+      FkeyWord = #{record.fkeyword,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hk.bean.Senddocs" >
+    update senddocs
+    <set >
+      <if test="fdepartment != null" >
+        Fdepartment = #{fdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="fdepartmentid != null" >
+        FdepartmentID = #{fdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="ffiledate != null" >
+        FFiledate = #{ffiledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fsecrecy != null" >
+        FSecrecy = #{fsecrecy,jdbcType=INTEGER},
+      </if>
+      <if test="fno != null" >
+        FNo = #{fno,jdbcType=VARCHAR},
+      </if>
+      <if test="ftitle != null" >
+        Ftitle = #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadfile != null" >
+        FUploadFile = #{fuploadfile,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadname != null" >
+        FuploadName = #{fuploadname,jdbcType=VARCHAR},
+      </if>
+      <if test="fuploadnumer != null" >
+        FuploadNumer = #{fuploadnumer,jdbcType=INTEGER},
+      </if>
+      <if test="fsecrecylevel != null" >
+        FSecrecyLevel = #{fsecrecylevel,jdbcType=INTEGER},
+      </if>
+      <if test="fcarrier != null" >
+        Fcarrier = #{fcarrier,jdbcType=VARCHAR},
+      </if>
+      <if test="fcarrierid != null" >
+        FcarrierID = #{fcarrierid,jdbcType=VARCHAR},
+      </if>
+      <if test="fdraftpeople != null" >
+        FDraftPeople = #{fdraftpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="fdraftpeopleid != null" >
+        FDraftPeopleID = #{fdraftpeopleid,jdbcType=VARCHAR},
+      </if>
+      <if test="fnucleardraft != null" >
+        FNuclearDraft = #{fnucleardraft,jdbcType=VARCHAR},
+      </if>
+      <if test="fnucleardraftid != null" >
+        FNuclearDraftID = #{fnucleardraftid,jdbcType=VARCHAR},
+      </if>
+      <if test="faudit != null" >
+        Faudit = #{faudit,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditid != null" >
+        FauditID = #{fauditid,jdbcType=VARCHAR},
+      </if>
+      <if test="fcountersign != null" >
+        Fcountersign = #{fcountersign,jdbcType=VARCHAR},
+      </if>
+      <if test="fissuer != null" >
+        FIssuer = #{fissuer,jdbcType=VARCHAR},
+      </if>
+      <if test="fissuerid != null" >
+        FIssuerID = #{fissuerid,jdbcType=VARCHAR},
+      </if>
+      <if test="flazy != null" >
+        FLazy = #{flazy,jdbcType=VARCHAR},
+      </if>
+      <if test="fremark != null" >
+        FRemark = #{fremark,jdbcType=VARCHAR},
+      </if>
+      <if test="fmainbodyid != null" >
+        FMainBodyId = #{fmainbodyid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodelid != null" >
+        FModelId = #{fmodelid,jdbcType=INTEGER},
+      </if>
+      <if test="fdocumentstatus != null" >
+        FDocumentStatus = #{fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fcopydepartments != null" >
+        FCopyDepartments = #{fcopydepartments,jdbcType=VARCHAR},
+      </if>
+      <if test="fmainsupplydep != null" >
+        FMainSupplyDep = #{fmainsupplydep,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=CHAR},
+      </if>
+      <if test="fkeyword != null" >
+        FkeyWord = #{fkeyword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hk.bean.Senddocs" >
+    update senddocs
+    set Fdepartment = #{fdepartment,jdbcType=VARCHAR},
+      FdepartmentID = #{fdepartmentid,jdbcType=VARCHAR},
+      FFiledate = #{ffiledate,jdbcType=TIMESTAMP},
+      FSecrecy = #{fsecrecy,jdbcType=INTEGER},
+      FNo = #{fno,jdbcType=VARCHAR},
+      Ftitle = #{ftitle,jdbcType=VARCHAR},
+      FUploadFile = #{fuploadfile,jdbcType=VARCHAR},
+      FuploadName = #{fuploadname,jdbcType=VARCHAR},
+      FuploadNumer = #{fuploadnumer,jdbcType=INTEGER},
+      FSecrecyLevel = #{fsecrecylevel,jdbcType=INTEGER},
+      Fcarrier = #{fcarrier,jdbcType=VARCHAR},
+      FcarrierID = #{fcarrierid,jdbcType=VARCHAR},
+      FDraftPeople = #{fdraftpeople,jdbcType=VARCHAR},
+      FDraftPeopleID = #{fdraftpeopleid,jdbcType=VARCHAR},
+      FNuclearDraft = #{fnucleardraft,jdbcType=VARCHAR},
+      FNuclearDraftID = #{fnucleardraftid,jdbcType=VARCHAR},
+      Faudit = #{faudit,jdbcType=VARCHAR},
+      FauditID = #{fauditid,jdbcType=VARCHAR},
+      Fcountersign = #{fcountersign,jdbcType=VARCHAR},
+      FIssuer = #{fissuer,jdbcType=VARCHAR},
+      FIssuerID = #{fissuerid,jdbcType=VARCHAR},
+      FLazy = #{flazy,jdbcType=VARCHAR},
+      FRemark = #{fremark,jdbcType=VARCHAR},
+      FMainBodyId = #{fmainbodyid,jdbcType=INTEGER},
+      FModelId = #{fmodelid,jdbcType=INTEGER},
+      FDocumentStatus = #{fdocumentstatus,jdbcType=VARCHAR},
+      FCopyDepartments = #{fcopydepartments,jdbcType=VARCHAR},
+      FMainSupplyDep = #{fmainsupplydep,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=CHAR},
+      FkeyWord = #{fkeyword,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

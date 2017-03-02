@@ -1,0 +1,129 @@
+
+CREATE TABLE SendDocs(
+	ID int primary key auto increment,
+	Fdepartment nvarchar(100) NULL,
+	FdepartmentID nvarchar(100) NULL,
+	FFiledate datetime NULL,
+	FSecrecy int NULL,
+	FNo nvarchar(50) NULL,
+	Ftitle nvarchar(50) NULL,
+	FUploadFile nvarchar(100) NULL,
+	FuploadName nvarchar(500) NULL,
+	FuploadNumer int NULL,
+	FSecrecyLevel int NULL,
+	Fcarrier nvarchar(100) NULL,
+	FcarrierID nvarchar(100) NULL,
+	FDraftPeople nvarchar(50) NULL,
+	FDraftPeopleID nvarchar(50) NULL,
+	FNuclearDraft nvarchar(50) NULL,
+	FNuclearDraftID nvarchar(50) NULL,
+	Faudit nvarchar(50) NULL,
+	FauditID nvarchar(50) NULL,
+	Fcountersign nvarchar(50) NULL,
+	FIssuer nvarchar(50) NULL,
+	FIssuerID nvarchar(50) NULL,
+	FLazy nvarchar(50) NULL,
+	FRemark nvarchar(500) NULL,
+	FMainBodyId int NULL,
+	FModelId int NULL,
+	FDocumentStatus nvarchar(50) NULL,
+	FCopyDepartments nvarchar(500) NULL,
+	FMainSupplyDep nvarchar(100) NULL,
+	isdel nchar(10) NULL,
+	FkeyWord nvarchar(50) NULL
+);
+
+
+
+
+CREATE TABLE UploadFile(
+	ID int primary key auto_increment,
+	attachCode int NOT NULL,
+	attachName nvarchar(100) NOT NULL,
+	attachFilePath nvarchar(200) NOT NULL,
+	creatorName nvarchar(10) NOT NULL,
+	creatorID varchar(50) NOT NULL,
+	description nvarchar(200) NULL,
+	getTime datetime NOT NULL,
+	generatedName nvarchar(100) NOT NULL,
+	documentId int NULL,
+	receiveDocId int NULL
+);
+
+
+
+CREATE TABLE MainBody(
+	ID int primary key auto_increment,
+	FCode int NOT NULL,
+	FFileName nvarchar(100) NOT NULL,
+	FFilePath nvarchar(100) NOT NULL,
+	isDel nchar(10) NOT NULL,
+	FFileNameView nvarchar(50) NULL
+);
+
+
+CREATE TABLE MainSupplyDep(
+	ID int primary key auto_increment,
+	FDeptID nvarchar(100) NOT NULL,
+	FDeptCode nvarchar(100) NOT NULL,
+	FDeptName nvarchar(100) NULL,
+	FSendFileID int NOT NULL,
+	isDel nchar(10) NOT NULL,
+	FDeptype int NOT NULL
+);
+
+CREATE TABLE CopyDepartments(
+	ID int primary key auto_increment,
+	FDeptID nvarchar(100) NOT NULL,
+	FDeptCode nvarchar(100) NOT NULL,
+	FDeptName nvarchar(50) NULL,
+	FSendFileID int NOT NULL,
+	isDel nchar(10) NOT NULL,
+	FDepType nvarchar(50) NOT NULL
+);
+
+CREATE TABLE CounterSigns(
+	ID int primary key auto_increment,
+	FCountersignsID nvarchar(100) NOT NULL,
+	FCountersignsCode nvarchar(100) NOT NULL,
+	FCountersignsName nvarchar(100) NOT NULL,
+	FSendFileID int NOT NULL,
+	FSuggestion nvarchar(100) NOT NULL,
+	FisAgree int NOT NULL,
+	isDel nchar(10) NOT NULL
+);
+
+CREATE TABLE PostingClassified(
+	ID int primary key auto_increment,
+	Code nvarchar(100) NOT NULL,
+	Name nchar(100) NOT NULL,
+	IsDel nchar(10) NOT NULL
+);
+
+CREATE TABLE SecretLevel(
+	ID int primary key auto_increment,
+	Code nvarchar(100) NOT NULL,
+	Name nchar(100) NOT NULL,
+	IsDel nchar(10) NOT NULL
+);
+
+CREATE TABLE SecretPeriod(
+	ID int primary key auto_increment,
+	Code nvarchar(100) NOT NULL,
+	Name nchar(100) NOT NULL,
+	IsDel nchar(10) NOT NULL
+);
+
+CREATE TABLE DeptSignLog(
+	ID int primary key auto_increment,
+	FSendFileID int NOT NULL,
+	FuserID nvarchar(50) NULL,
+	FuserName nvarchar(50) NULL,
+	FpositionID nvarchar(50) NULL,
+	FpositionName nvarchar(50) NULL,
+	FText nvarchar(255) NULL,
+	SignTime datetime NOT NULL,
+	isDel nvarchar(50) NOT NULL
+);
+
+
