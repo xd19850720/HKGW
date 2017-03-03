@@ -11,9 +11,9 @@
 <title>操作</title>
 <jsp:include page="/base.jsp"></jsp:include>
 <script language="javascript" type="text/javascript"
-	src="<%=path %>/jsp/js/senddocjs/updateDocument.js"></script>
+	src="<%=basePath %>/jsp/js/senddocjs/updateDocument.js"></script>
 <script language="javascript" type="text/javascript"
-	src="<%=path %>/js/common.js"></script>
+	src="<%=basePath %>/js/common.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/css/addDocument.css" />
 <style type="text/css">
