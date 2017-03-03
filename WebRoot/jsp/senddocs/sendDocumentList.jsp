@@ -32,10 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			width="0"></OBJECT>
 		<a href="#" class="easyui-linkbutton" plain="true" id="print"
 			iconCls="icon-print" onclick="getPrintIds()"
-			style="float: right; display: none">打印2</a>
-		<!-- <a href="#" class="easyui-linkbutton"
-			plain="true" id="exportExcel" iconCls="icon-print"
-			onclick="bringToExcel('sendDocumentList')" style="float: right;">导出Excel</a> -->
+			style="float: right; display: none">打印</a>
 	</div>
 	<div region="center" border="false">
 		<table id="sendDocumentList"></table>
@@ -92,13 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 		</table>
 		<br />
-		<!-- 		<center> -->
-		<!-- 			<a href="#" class="easyui-linkbutton" iconcls="icon-search" -->
-		<!-- 				plain="true" onclick="do_search()" id="btn_search">查询</a> <a -->
-		<!-- 				href="#" class="easyui-linkbutton" iconcls="icon-remove" -->
-		<!-- 				plain="true" onclick="do_clear()" id="btn_clear" -->
-		<!-- 				style="margin-left: 15px;">清除</a> -->
-		<!-- 		</center> -->
 	</div>
  	<div id="dlg-buttons">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-search"

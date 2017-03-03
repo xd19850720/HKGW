@@ -230,7 +230,7 @@ function add() {
 		},
 		dataType : "json",
 		success : function(data) {
-			window.location.href = "updateDocument.jsp?docId=" + data.fid;
+			window.location.href = "updateDocument.jsp?docId=" + data.id;
 		},
 		failure : function() {
 

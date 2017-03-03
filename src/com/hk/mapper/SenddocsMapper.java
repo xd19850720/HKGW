@@ -2,7 +2,10 @@ package com.hk.mapper;
 
 import com.hk.bean.Senddocs;
 import com.hk.bean.SenddocsExample;
+
+import java.util.HashMap;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SenddocsMapper {
@@ -29,4 +32,6 @@ public interface SenddocsMapper {
     int updateByPrimaryKeySelective(Senddocs record);
 
     int updateByPrimaryKey(Senddocs record);
+    
+    void updatestatusById(HashMap<String,String> map);
 }

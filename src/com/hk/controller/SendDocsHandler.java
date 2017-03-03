@@ -53,7 +53,6 @@ public class SendDocsHandler {
 			mainsupplydepService.add(mainsupplydeps.get(i));
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("xd"+senddocs.getId());
 		map.put("id", senddocs.getId());
 		return map;
 	}
@@ -67,5 +66,16 @@ public class SendDocsHandler {
 		map.put("flag", "删除成功");
 		return map;
 	}
+	
+	@RequestMapping("/updatestatusbyid")
+	@ResponseBody
+	public Map<String, Object> updatestatusById(Integer id,String status){
+		//插入主表数据
+		sendDocsService.updatestatusById(id, status);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "更新成功");
+		return map;
+	}
+
 
 }

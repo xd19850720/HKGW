@@ -781,38 +781,28 @@ function lockedup() {
 function readyToVerify() {
 	var row = $("#sendDocumentList").datagrid('getSelected');
 	if (row) {
-		var status = row.fDocumentStatus;
-		if ('草稿' != status) {
-			$.messager.alert("提示", "只有草稿状态下的公文允许提交!");
-			return;
-		} else {
-			var year = row.fyear;
-			var fileDate = row.fFiledate;
+		var status = row.fdocumentstatus;
+			if(status == '草稿' ){
+				status = "待审核";
+			}else if(status == '待审核'){
+				status = "待发送";
+			}else if(status == '待发送'){
+				status = "待完成";
+			}else {
+				status = "草稿";
+			}
+			var fileDate = row.ffiledate;
 			var fileName = row.ftitle;
-			var mainSend = row.fMainSupplyDep;
-			var fenshu = row.fcopies;
-			var zhangshu = row.fsheets;
+			var mainSend = row.fmainsupplydep;
 			var attachmentName = row.fuploadName;
 			var attachmentNums = row.fuploadNumer;
 			// 校验数据
-			if (!year) {
-				$.messager.alert("提示", "形成年度不能为空");
-				return false;
-			}
 			if (!fileDate) {
 				$.messager.alert("提示", "文件日期不能为空");
 				return false;
 			}
 			if (!fileName) {
 				$.messager.alert("提示", "题名不能为空");
-				return false;
-			}
-			if (!zhangshu) {
-				$.messager.alert("提示", "张数不能为空");
-				return false;
-			}
-			if (!fenshu) {
-				$.messager.alert("提示", "份数不能为空");
 				return false;
 			}
 			if (!mainSend) {
@@ -830,13 +820,11 @@ function readyToVerify() {
 			}
 
 			$.ajax({
-				url : 'DocumentDealAction_readyToVerify.do',
+				url : '/HKGW/sendDocs/updatestatusbyid.action',
 				type : "POST",
 				data : {
 					id : row.id,
-					status : '待排版校对',
-					fMainBodyID : row.fMainBodyId,
-					version:0
+					status : status
 				},
 				dataType : 'json',
 				success : function(data) {
@@ -844,7 +832,6 @@ function readyToVerify() {
 					$("#sendDocumentList").datagrid('reload');
 				}
 			});
-		}
 	} else {
 		$.messager.alert("提示", "请选择一条数据");
 		return;

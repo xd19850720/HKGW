@@ -37,5 +37,13 @@ public class SendDocsServiceImpl implements SendDocsService {
 		senddocsMapper.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public void updatestatusById(Integer id, String status) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id+"");
+		map.put("status", status);
+		senddocsMapper.updatestatusById(map);
+	}
+
 	
 }
