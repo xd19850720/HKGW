@@ -897,10 +897,13 @@ function addSendDocument() {
 		refresh();
 	}
 }
-// 刷新列表
+
+
+//刷新列表
 function refresh() {
 	$("#sendDocumentList").datagrid('reload');
 }
+
 function delItems() {
 	var row = $("#sendDocumentList").datagrid('getSelected');
 	if (row) {
