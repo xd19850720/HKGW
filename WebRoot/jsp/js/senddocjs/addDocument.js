@@ -230,7 +230,9 @@ function add() {
 		},
 		dataType : "json",
 		success : function(data) {
-			window.location.href = "updateDocument.jsp?docId=" + data.id;
+//			window.location.href = "updateDocument.jsp?docId=" + data.id;
+			window.returnValue = "新增成功";
+			window.close();
 		},
 		failure : function() {
 

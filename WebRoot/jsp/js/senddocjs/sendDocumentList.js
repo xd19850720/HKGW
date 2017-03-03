@@ -886,20 +886,16 @@ function openOfficeControl() {
 // 新增
 function addSendDocument() {
 
-	// var iTop = (window.screen.availHeight - 620) / 2; // 获得窗口的垂直位置;
-	// var iLeft = (window.screen.availWidth - 900) / 2; // 获得窗口的水平位置;
-	// var value = window.showModalDialog('addDocument.jsp', ' ',
-	// 'dialogHeight=620px;dialogWidth=900px;dialogTop=' + iTop
-	// + ';dialogLeft=' + iLeft + ';resizeable=yes;status=no');
 
 	var value = window.open('addDocument.jsp', "_blank",
 			"toolbar=yes, menubar=yes,   resizable=yes,location=yes,status=yes,height="
 					+ window.screen.availHeight + ", width="
 					+ window.screen.availWidth);
 
-	/*
-	 * if (!child.closed) { updateDocument(value); }
-	 */
+	if(value){
+		$.messager.alert("提示", "新增数据成功");
+		refresh();
+	}
 }
 // 刷新列表
 function refresh() {
